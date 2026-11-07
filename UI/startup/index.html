@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="SHUIKE 品牌动画。">
+  <title>SHUIKE · Opening</title>
+  <script>
+    try {
+      const stored = localStorage.getItem("shuike:theme");
+      const theme = stored === "light" ? "light" : "dark";
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.style.colorScheme = theme === "light" ? "light" : "dark";
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.content = theme === "light" ? "#e9e9ec" : "#000000";
+    } catch (error) {}
+  </script>
+  <link rel="icon" href="data:,">
+  <link rel="preload" href="../../fonts/Switzer-Semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../css/theme.css?v=20261016-theme">
+  <link rel="stylesheet" href="../../css/home.css?v=20261021-startup-frame">
+  <link rel="stylesheet" href="../../css/intro.css?v=20261021-startup-frame">
+  <link rel="stylesheet" href="startup.css?v=20261021-theme-sync2">
+  <script src="../../js/intro.js?v=20261021-startup-frame" defer></script>
+  <script src="startup-frame.js?v=20261021-brand-only" defer></script>
+</head>
+<body class="startup-page">
+  <div class="intro-stage" aria-hidden="true">
+    <div class="intro-grid"><div class="intro-grid-veil"></div></div>
+    <div class="intro-signature">
+      <div class="signature-border"></div>
+      <div class="signature-wordmark"><span>Made in ShuiKe</span><i class="signature-trail"></i></div>
+    </div>
+  </div>
+
+  <main class="home" aria-label="SHUIKE 开场">
+    <header class="desktop-heading">
+      <h1 class="home-title" aria-label="SHUIKE"><span class="title-outline" aria-hidden="true">SHUIKE</span><span class="title-fill" aria-hidden="true">SHUIKE</span><i class="title-scan" aria-hidden="true"></i></h1>
+    </header>
+  </main>
+</body>
+</html>

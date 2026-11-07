@@ -1,0 +1,90 @@
+/* =========================================================
+   00 — HEX BOOT STREAM
+   The [00] frame keeps the live 3D backdrop; the left side carries a
+   short boot log in hex, typed out after the page curtain lifts.
+   ========================================================= */
+
+.void__slab {
+  position: relative;
+}
+
+.void__hex {
+  position: absolute;
+  z-index: 1;
+  left: clamp(16px, 2.4vw, 34px);
+  top: clamp(18px, 4.6vh, 40px);
+  width: min(500px, 38%);
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: clamp(9px, .72vw, 11px);
+  font-weight: 400;
+  line-height: 1.95;
+  letter-spacing: .08em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+  user-select: none;
+  text-shadow: 0 1px 3px rgb(5 5 4 / .85);
+  transition: opacity .45s ease, transform .45s ease, filter .45s ease;
+}
+
+.void__hex.is-complete {
+  opacity: 0;
+  transform: translateY(-6px);
+  filter: blur(2px);
+}
+
+.void__hex[hidden] {
+  display: none;
+}
+
+html[data-theme="light"] .void__hex {
+  text-shadow: 0 1px 2px rgb(255 255 255 / .55);
+}
+
+.void__hex-code {
+  opacity: .9;
+}
+
+.void__hex-cursor {
+  display: inline-block;
+  width: .62em;
+  height: 1.02em;
+  margin-left: .22em;
+  vertical-align: -.12em;
+  background: var(--signal);
+  box-shadow: 0 0 8px rgb(216 195 154 / .55);
+  animation: hex-caret 1s steps(1) infinite;
+}
+
+html[data-theme="light"] .void__hex-cursor {
+  box-shadow: 0 0 8px rgb(127 92 42 / .35);
+}
+
+@keyframes hex-caret {
+  0%, 48% { opacity: 1; }
+  49%, 100% { opacity: 0; }
+}
+
+@media (max-width: 720px) {
+  .void__hex {
+    left: 14px;
+    top: 16px;
+    width: calc(100% - 28px);
+    font-size: 9px;
+    line-height: 1.85;
+    letter-spacing: .06em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .void__hex {
+    transition: none;
+  }
+
+  .void__hex-cursor {
+    animation: none;
+    opacity: 1;
+  }
+}

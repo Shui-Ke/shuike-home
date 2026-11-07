@@ -1,0 +1,250 @@
+/* =========================================================
+   00 — PLANET DOSSIER CARD
+   Appears at the left of the [00] frame when a solar-system planet is
+   selected. The card floats over the transparent canvas, not over the
+   whole frame, so the focused planet stays visible next to it.
+   ========================================================= */
+
+.void__planet {
+  position: absolute;
+  z-index: 3;
+  left: clamp(16px, 2.4vw, 34px);
+  top: 50%;
+  width: min(336px, 31%);
+  max-height: calc(100% - 24px);
+  padding: 15px 18px 12px;
+  transform: translateY(-50%);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  border: 1px solid var(--line-strong);
+  background:
+    linear-gradient(150deg, rgb(255 255 255 / 3.5%), transparent 34%),
+    rgb(9 9 7 / .82);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 50px rgb(0 0 0 / .45), inset 0 1px 0 rgb(255 255 255 / .04);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  opacity: 0;
+  translate: 0 10px;
+  transition: opacity .35s var(--ease), translate .35s var(--ease);
+  pointer-events: auto;
+}
+
+.void__planet.is-open {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.void__planet[hidden] {
+  display: none;
+}
+
+/* A hairline of signal on the left edge, like the other dossier cards. */
+.void__planet::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 18px;
+  bottom: 18px;
+  width: 1px;
+  background: var(--signal);
+  opacity: .7;
+}
+
+.void__planet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line);
+}
+
+.void__planet-code {
+  color: var(--signal);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.void__planet-close {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: -2px -4px -2px 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  color: var(--muted);
+  font: 15px/1 var(--font-mono);
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+
+.void__planet-close:hover {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+
+.void__planet-close:focus-visible,
+.void__planet-back:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 3px;
+}
+
+.void__planet-title {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: end;
+  margin: 11px 0 0;
+}
+
+.void__planet-index {
+  color: transparent;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: .78;
+  letter-spacing: -.05em;
+  -webkit-text-stroke: 1px var(--line-strong);
+}
+
+.void__planet-name {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -.04em;
+}
+
+.void__planet-latin {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.void__planet-type {
+  margin: 9px 0 0;
+  color: var(--signal);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.void__planet-facts {
+  margin: 10px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.void__planet-facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.void__planet-facts dt {
+  color: var(--muted-dark);
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.void__planet-facts dd {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-align: right;
+}
+
+.void__planet-back {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: none;
+  color: var(--ink-soft);
+  font: 9px/1 var(--font-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .2s;
+}
+
+.void__planet-back i {
+  color: var(--signal);
+  font-style: normal;
+  font-size: 14px;
+  transition: transform .2s;
+}
+
+.void__planet-back:hover {
+  color: var(--signal);
+}
+
+.void__planet-back:hover i {
+  transform: translateX(-3px);
+}
+
+@media (max-width: 980px) and (min-width: 721px) {
+  .void__planet {
+    width: 300px;
+  }
+}
+
+@media (max-width: 720px) {
+  .void__planet {
+    left: 12px;
+    right: 12px;
+    top: auto;
+    bottom: 10px;
+    width: auto;
+    max-height: calc(100% - 20px);
+    padding: 12px 14px 10px;
+    overflow: auto;
+    transform: none;
+    translate: 0 8px;
+  }
+
+  .void__planet.is-open {
+    translate: 0 0;
+  }
+
+  .void__planet-index {
+    font-size: 32px;
+  }
+
+  .void__planet-name {
+    font-size: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .void__planet {
+    transition: none;
+  }
+
+  .void__planet-close,
+  .void__planet-back,
+  .void__planet-back i {
+    transition: none;
+  }
+}

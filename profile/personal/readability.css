@@ -1,0 +1,12 @@
+/* Readability pass.
+   All body / UI text below the title scale was lifted by 1px in the component
+   stylesheets. The two lead paragraphs take one extra notch because they carry
+   the main reading load; display titles and card headings keep their scale. */
+
+.hero__lead {
+  font-size: clamp(14px, 1.12vw, 17px);
+}
+
+.profile__lead {
+  font-size: clamp(18px, 1.45vw, 22px);
+}

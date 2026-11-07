@@ -1,0 +1,59 @@
+/* SHUIKE universal page transition.
+   A full-viewport veil is the only moving part: the current document fades
+   under it, then the destination is revealed as the veil fades away. The veil
+   follows the active day/night skin (black at night, the page's paper tone by
+   day), so it never flashes the wrong background between themes.
+   The cover lives on <html> so it can be painted before <body> is parsed.
+   Timings and easing are owned by js/page-transition.js; these rules supply
+   the layers, the theme colours and the no-script-safe background. */
+
+:root {
+  --spt-veil: #000;
+  --spt-z-index: 2147483000;
+}
+
+html[data-theme="light"] {
+  --spt-veil: #e9e9ec;
+}
+
+html.spt-leaving,
+html.spt-entering {
+  background: var(--spt-veil);
+  overscroll-behavior: none;
+}
+
+html.spt-leaving body {
+  cursor: progress;
+}
+
+.spt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--spt-z-index);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  background: var(--spt-veil);
+  opacity: 1;
+  pointer-events: auto;
+  touch-action: none;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  contain: strict;
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+.spt-overlay[data-phase="out"] {
+  cursor: progress;
+}
+
+/* Belt-and-braces only: JavaScript drives the fade with WAAPI and its own
+   fallback. If a future browser path uses the class instead, keep it short. */
+@media (prefers-reduced-motion: reduce) {
+  .spt-overlay {
+    transition-duration: 1ms !important;
+  }
+}

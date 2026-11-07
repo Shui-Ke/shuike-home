@@ -1,0 +1,40 @@
+/* Host overlay for the standalone SHUIKE opening page. Remove this file with the frame to uninstall. */
+html[data-brand-played] .startup-frame {
+  display:none
+}
+
+.startup-frame {
+  position:fixed;
+  inset:0;
+  z-index:100000;
+  overflow:hidden;
+  background:var(--background,#000);
+  transition:opacity .4s ease,visibility .4s ease
+}
+
+.startup-frame iframe {
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:var(--background,#000);
+  opacity:0;
+  transition:opacity .25s ease
+}
+
+.startup-frame.is-ready iframe {
+  opacity:1
+}
+
+.startup-frame.is-done {
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .startup-frame,
+  .startup-frame iframe {
+    transition:none
+  }
+}

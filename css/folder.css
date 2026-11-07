@@ -1,0 +1,44 @@
+/* Cobp / Uiverse mighty-pig-13, translated from Tailwind; see notices. */
+.window-body:has(>.profile-folder){padding:8px 16px}
+.profile-folder{display:flex;flex-direction:column;align-items:center;width:100px;padding:4px 8px 2px;margin:0;border:0;background:none;color:var(--glass-text);border-radius:8px;text-decoration:none}
+.folder-art{display:block;position:relative;width:84px;height:56px;perspective:525px;transform:scale(.85);transform-origin:top center;margin-top:6px;margin-bottom:-8.4px}
+.folder-art>span{display:block;position:absolute;border-radius:5.6px;transition:transform .3s ease,box-shadow .3s ease;transform-origin:bottom}
+.folder-back{inset:0;background:#d97706;border-top-left-radius:0!important}
+.folder-back:after{content:"";position:absolute;bottom:99%;left:0;width:33.333%;height:10%;background:#d97706;border-radius:5.6px 5.6px 0 0}
+.folder-back:before{content:"";position:absolute;top:-5.25px;left:26.425px;width:5.6px;height:5.6px;background:#d97706;clip-path:polygon(0 35%,0 100%,50% 100%)}
+.folder-paper{inset:1.4px;background:#a1a1aa}.folder-paper:nth-child(3){background:#d4d4d8}.folder-paper:nth-child(4){background:#e4e4e7}
+.folder-front{bottom:0;left:0;width:100%;height:97.5%;background:linear-gradient(to top,#f59e0b,#fbbf24);border-top-right-radius:0!important}
+.folder-front:after{content:"";position:absolute;bottom:99%;right:0;width:60.833%;height:5.6px;background:#fbbf24;border-radius:5.6px 5.6px 0 0}
+.folder-front:before{content:"";position:absolute;top:-3.5px;right:49.7px;width:4.2px;height:4.2px;background:#fbbf24;clip-path:polygon(100% 14%,50% 100%,100% 100%)}
+.profile-folder:not(:disabled):is(:hover,:focus-visible) .folder-back{box-shadow:0 7px 14px #0003}
+.profile-folder:not(:disabled):is(:hover,:focus-visible) .folder-paper:nth-child(2){transform:rotateX(-20deg)}
+.profile-folder:not(:disabled):is(:hover,:focus-visible) .folder-paper:nth-child(3){transform:rotateX(-30deg)}
+.profile-folder:not(:disabled):is(:hover,:focus-visible) .folder-paper:nth-child(4){transform:rotateX(-38deg)}
+.profile-folder:not(:disabled):is(:hover,:focus-visible) .folder-front{transform:rotateX(-46deg) translateY(.35px);box-shadow:inset 0 7px 14px #fbbf24,inset 0 -7px 14px #d97706}
+.folder-label{display:block;margin-top:6px;font:600 11px/1.4 Switzer,Arial,sans-serif;letter-spacing:.06em}
+.glass-panel[data-expanded="true"]{left:0!important;top:0!important;width:100vw!important;height:100dvh!important;border-radius:0;z-index:1000!important}
+.glass-panel[data-expanded="true"] .window-bar{cursor:default}
+.glass-panel[data-expanded="true"] .resize-edge{display:none}
+.glass-panel[data-expanded="true"] .window-body{padding-bottom:120px}
+:root[data-expanded-window] .desktop-heading{visibility:hidden}
+:root[data-expanded-window] .glass-panel:not([data-expanded="true"]){visibility:hidden;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.folder-art>span{transition:none}}
+
+.window-maximize span{background:#e7b95a;color:#392b0c;font-size:12px}
+.profile-folder:disabled{cursor:default}
+.folder-label{max-width:100%;overflow-wrap:anywhere;text-align:center}
+
+/* 文件夹交互：双击打开、拖动摆放（js/folder-drag.js）。坐标相对所属 .glass-panel。 */
+.profile-folder{position:relative;z-index:1;touch-action:none;user-select:none;-webkit-user-drag:none;cursor:grab}
+.profile-folder:disabled{cursor:default}
+.profile-folder[data-placed="true"]{position:absolute}
+.profile-folder[data-dragging="true"]{cursor:grabbing;z-index:3;filter:drop-shadow(0 14px 22px rgb(0 0 0 / 38%))}
+/* 拖出窗口时临时挂到 body 上，用 viewport 坐标跟随指针；投放后再放回窗口。 */
+.profile-folder[data-detached="true"]{pointer-events:none;z-index:9999}
+.glass-panel[data-folder-drop="true"]{outline:2px solid var(--glass-edge-active);outline-offset:-2px}
+.folder-hint{position:absolute;left:12px;bottom:8px;z-index:4;padding:2px 7px;border:1px solid var(--tooltip-border);border-radius:6px;background:var(--tooltip-bg);color:var(--tooltip-ink);font:10px/1.5 Arial,"Microsoft YaHei",sans-serif;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s ease}
+.folder-hint[data-visible="true"]{opacity:1}
+/* 未配置页面的文件夹：双击时轻晃一下，表示入口已响应但还没有目标页。 */
+@keyframes folder-pending-nudge{0%,100%{transform:translateX(0)}20%{transform:translateX(-3px)}40%{transform:translateX(2px)}60%{transform:translateX(-1px)}80%{transform:translateX(1px)}}
+.profile-folder.is-folder-pending{animation:folder-pending-nudge .34s ease}
+@media(prefers-reduced-motion:reduce){.folder-hint{transition:none}.profile-folder.is-folder-pending{animation:none}}

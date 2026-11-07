@@ -1,0 +1,12 @@
+/* Standalone opening page: no page scroll, title centered like the home header. */
+.startup-page {
+  margin:0;
+  min-height:100svh;
+  overflow:hidden;
+  background:var(--background,#000);
+  color:var(--foreground,#fff)
+}
+
+.startup-page .home {
+  min-height:100svh
+}

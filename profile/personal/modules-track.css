@@ -1,0 +1,77 @@
+/* =========================================================
+   PRACTICE — flat five-card horizontal loop
+   The five cards sit in one row and drift slowly to the left. A second,
+   visually identical set follows them so a card leaving the left edge is
+   replaced seamlessly from the right. No perspective, no 3D.
+   ========================================================= */
+
+.modules {
+  --module-w: clamp(240px, 24vw, 300px);
+  --module-h: 460px;
+  --module-gap: 20px;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(var(--module-h) + 20px);
+  margin: 34px 0 0;
+  padding: 10px 0;
+  overflow: hidden;
+  overflow: clip;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+}
+
+.modules__track {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  height: var(--module-h);
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.modules .module {
+  flex: 0 0 var(--module-w);
+  width: var(--module-w);
+  height: var(--module-h);
+  min-height: 0;
+  margin: 0 var(--module-gap) 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.modules .module > .win-bar,
+.modules .module > .win-foot {
+  flex: 0 0 auto;
+}
+
+.modules .module > .module__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+}
+
+@media (max-width: 980px) {
+  .modules {
+    --module-w: clamp(220px, 30vw, 260px);
+  }
+}
+
+@media (max-width: 720px) {
+  .modules {
+    --module-w: min(78vw, 300px);
+    --module-gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modules {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+  }
+
+  .modules__track {
+    will-change: auto;
+  }
+}

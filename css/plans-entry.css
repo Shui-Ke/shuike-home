@@ -1,0 +1,16 @@
+/* The scene itself is the departure; no loading counters or blackout. */
+.plans-entry-canvas,.plans-entry-ui,.plans-entry-black{display:none}
+html[data-plans-entry] .desktop-heading,
+html[data-plans-entry] .particle-jet,
+html[data-plans-entry] .pointer-grid,
+html[data-plans-entry] .earth-archive,
+html[data-plans-entry] .earth-terminal,
+html[data-plans-entry] .globe-map-trigger,
+html[data-plans-entry] .map-controls,
+html[data-plans-entry] .window-dock,
+html[data-plans-entry] #desktop,
+html[data-plans-entry] .landing-menu{
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  transition:opacity .3s ease,visibility .3s ease;
+}
+html[data-plans-entry],html[data-plans-entry] body{transition:background-color .45s ease}

@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="zh-CN" data-material="glass">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000">
+  <meta name="description" content="SHUIKE · Personal Profile 个人终端">
+  <title>Personal Profile · SHUIKE</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/page-transition.css?v=20261025-theme-veil">
+  <script src="../js/page-transition.js?v=20261025-theme-veil"></script>
+  <script src="../js/theme-boot.js?v=20261016-theme"></script>
+  <script src="appearance.js?v=20261018-waveform-motion"></script>
+  <link rel="preload" href="../fonts/Switzer-Semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="components.css?v=20261018">
+  <link rel="stylesheet" href="profile.css?v=20261025-theme-veil">
+  <link rel="stylesheet" href="appearance.css?v=20261018-waveform-motion">
+  <link rel="stylesheet" href="../UI/oc-radial-menu/style.css?v=20261022-variant">
+  <link rel="stylesheet" href="controls.css?v=20261022-voice2">
+  <link rel="stylesheet" href="music-library.css?v=20261023-inline">
+  <link rel="stylesheet" href="personal/transition.css?v=20261025-shield-final">
+  <link rel="stylesheet" href="../css/contact-window.css?v=20261025-mail-card">
+  <script defer src="../UI/landscape-gallery/images/gallery-data.js"></script>
+  <script defer src="../UI/landscape-gallery/script.js?v=20261018-textless"></script>
+  <script defer src="../UI/oc-radial-menu/script.js?v=20261022-variant"></script>
+  <script defer src="profile.js?v=20261022-voice3"></script>
+  <script defer src="controls.js?v=20261022-brutal"></script>
+  <script defer src="music-library.js?v=20261023-inline"></script>
+  <script defer src="../UI/frosted-sync/script.js"></script>
+  <script defer src="../UI/recording-timer/script.js?v=20261022-embedded"></script>
+  <script defer src="../js/mac-window.js?v=20261025-mac-zoom4"></script>
+  <script defer src="../js/contact-dossier.js?v=20261025-dossier5"></script>
+  <script defer src="../js/contact-window.js?v=20261025-mail-card"></script>
+  <script defer src="profile-mail.js?v=20261025-mail-card"></script>
+  <script defer src="personal/transition.js?v=20261025-back-fade"></script>
+</head>
+<body class="textless-layout">
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></symbol>
+    <symbol id="i-blog" viewBox="0 0 24 24"><path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M8 3v4m8-4v4M3 10h18"/></symbol>
+  </svg>
+  <div class="terminal-shell">
+    <div class="theme-backdrop theme-backdrop--day" data-theme-backdrop aria-hidden="true"><span class="theme-backdrop__sand"></span></div>
+    <div class="theme-backdrop theme-backdrop--night" aria-hidden="true"><span class="theme-backdrop__sand"></span></div>
+    <main class="workspace">
+      <div class="page-marker" data-focus-hide><span class="marker-block"></span><span class="marker-rule"></span> <span></span></div>
+      <div class="corner-controls" data-focus-hide role="group" aria-label="页面快捷操作">
+        <a class="corner-control" href="../index.html" aria-label="返回首页">
+          <svg class="corner-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path class="back-arrow" d="M19 12H6M11 6l-6 6 6 6"/>
+            <path class="back-line" d="M4 5v14"/>
+          </svg>
+        </a>
+        <button class="corner-control" type="button" data-theme-toggle aria-label="切换白天模式">
+          <svg class="corner-icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.42 1.42M17.66 17.66l1.42 1.42M19.07 4.93l-1.42 1.42M6.34 17.66l-1.42 1.42"/>
+          </svg>
+          <svg class="corner-icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5z"/>
+          </svg>
+        </button>
+        <a class="corner-control" href="../index.html#contact" data-mail-toggle aria-label="打开个人名片" aria-controls="contact-window" aria-expanded="false">
+          <svg class="corner-icon envelope-closed" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="6" width="18" height="13" rx="2"/>
+            <path d="M3 7l9 7 9-7"/>
+          </svg>
+          <svg class="corner-icon envelope-open" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 8l9-4 9 4"/>
+            <rect x="3" y="8" width="18" height="11" rx="2"/>
+            <path d="M7 12h10v4H7z"/>
+          </svg>
+        </a>
+      </div>
+      <p class="sr-only" role="status" aria-live="polite" data-mail-status></p>
+      <!-- Left lane: the idle OC figure stands on top of the news dock; both share one bottom edge. -->
+      <div class="oc-lane">
+        <section class="character-stage" id="character-stage" data-character-stage data-state="idle" aria-label="OC 角色展示">
+          <img class="character-art character-art--idle" src="MingYun/默认.webp" alt="明云 · 待机动画" width="640" height="1200" draggable="false" decoding="async">
+          <img class="character-art character-art--action" data-character-action alt="" width="640" height="1200" draggable="false" decoding="async">
+          <button class="character-hit" id="character-trigger" type="button" data-character-hit aria-label="展开明云互动菜单" aria-controls="character-menu" aria-expanded="false"></button>
+          <span class="sr-only" data-character-status aria-live="polite"></span>
+        </section>
+        <div class="character-menu-anchor">
+          <oc-radial-menu id="character-menu" data-variant="arc" external-trigger="character-trigger" data-collapsed aria-hidden="true"></oc-radial-menu>
+        </div>
+        <div class="news-area">
+          <div class="news-tools" role="group" aria-label="显示与刷新">
+            <button class="frosted-control eye-button is-shown" type="button" data-focus-toggle aria-label="隐藏其他界面，保留 OC 与互动菜单" aria-pressed="false">
+              <svg class="eye-button__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <g class="eye-button__eye">
+                  <path d="M4.5 24C9.7 15.4 16.5 11.5 24 11.5s14.3 3.9 19.5 12.5C38.3 32.6 31.5 36.5 24 36.5S9.7 32.6 4.5 24Z"></path>
+                  <circle cx="24" cy="24" r="4.2"></circle>
+                </g>
+                <path class="eye-button__slash" d="M3 45 45 3"></path>
+              </svg>
+            </button>
+            <button class="frosted-control sync-button" type="button" data-sync data-focus-hide aria-controls="topic-board" aria-expanded="false" aria-label="打开主题">
+              <svg class="sync-button__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <g transform="rotate(45 12 12)">
+                  <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"></path>
+                </g>
+              </svg>
+            </button>
+          </div>
+
+        <section class="news-dock" data-focus-hide aria-label="资讯与图片展示">
+          <div class="news-panel">
+            <div class="news-status-row">
+            <section class="ticker" aria-label="Breaking News">
+              <div class="ticker__track" aria-hidden="true">
+                <div class="ticker__group"><span class="ticker__unit"><span class="ticker__dot"></span><span class="ticker__text">Breaking News</span><span class="ticker__slash">/</span></span><span class="ticker__unit"><span class="ticker__dot"></span><span class="ticker__text">Breaking News</span><span class="ticker__slash">/</span></span></div>
+                <div class="ticker__group"><span class="ticker__unit"><span class="ticker__dot"></span><span class="ticker__text">Breaking News</span><span class="ticker__slash">/</span></span><span class="ticker__unit"><span class="ticker__dot"></span><span class="ticker__text">Breaking News</span><span class="ticker__slash">/</span></span></div>
+              </div>
+            </section>
+            <div class="recording-timer" aria-label="页面停留计时器">
+              <div class="rec" aria-hidden="true">
+                <span class="rec__ring"><span class="rec__pulse"></span><span class="rec__dot"></span></span>
+                <span class="rec__word">REC</span>
+              </div>
+              <div class="timecode" data-timecode data-theme-owner="page" role="timer" aria-live="off" aria-atomic="true" aria-label="计时 0 小时 0 分 0 秒">
+                <span class="timecode__unit" data-unit="hours" aria-hidden="true"><span class="digit" data-digit></span><span class="digit" data-digit></span></span>
+                <span class="separator separator--colon" aria-hidden="true"></span>
+                <span class="timecode__unit" data-unit="minutes" aria-hidden="true"><span class="digit" data-digit></span><span class="digit" data-digit></span></span>
+                <span class="separator separator--colon" aria-hidden="true"></span>
+                <span class="timecode__unit" data-unit="seconds" aria-hidden="true"><span class="digit" data-digit></span><span class="digit" data-digit></span></span>
+                <span class="separator separator--prime" aria-hidden="true"></span>
+                <span class="timecode__unit" data-unit="centiseconds" aria-hidden="true"><span class="digit" data-digit></span><span class="digit" data-digit></span></span>
+              </div>
+            </div>
+<section class="oc-voice" data-oc-voice data-open="false" aria-label="明云的对白" aria-live="polite">
+              <span class="oc-voice__tag" aria-hidden="true">
+                <svg class="oc-voice__icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                  <path d="M10 1.8 18.2 10 10 18.2 1.8 10Z"></path>
+                  <path class="oc-voice__play" d="M8.2 6.4 13.6 10 8.2 13.6Z"></path>
+                </svg>
+                <span class="oc-voice__label">Voice</span>
+              </span>
+              <p class="oc-voice__text" data-oc-voice-text></p>
+              <span class="oc-voice__progress" data-oc-voice-progress aria-hidden="true"></span>
+              <button class="oc-voice__continue" type="button" data-oc-voice-close aria-label="关闭对话">
+                <svg viewBox="0 0 18 12" aria-hidden="true" focusable="false"><path d="M1 1h16L9 11Z"></path></svg>
+              </button>
+            </section>
+            </div>
+            
+            <p class="sr-only" id="gallery-help">示例图片轮播。按住暂停，左右拖动或使用左右方向键切换，Home 和 End 跳至首尾。</p>
+            <div class="news-media">
+              <div class="news-visual">
+                <div class="media-frame">
+                  <section class="gallery glass" data-gallery data-image-dir="../UI/landscape-gallery/images/" role="group" aria-roledescription="carousel" aria-label="示例图片展示" aria-describedby="gallery-help" tabindex="0" data-textless="true">
+                    <div class="gallery__top"><span class="gallery__counter" aria-hidden="true"><span data-current></span><span class="gallery__counter-sep"></span><span data-total></span></span></div>
+                    <div class="gallery__viewport" data-viewport><div class="gallery__track" data-track></div></div>
+                    <span class="gallery__grain" aria-hidden="true"></span><span class="gallery__edge" aria-hidden="true"></span>
+                  </section>
+                  <noscript><img class="gallery-fallback" src="../UI/landscape-gallery/images/01-silent-tide.jpg" alt="示例图片：静谧海岸"></noscript>
+                </div>
+                <canvas class="news-waveform" data-waveform aria-hidden="true"></canvas>
+                <div class="news-rust" aria-hidden="true"></div>
+              </div>
+              <aside class="player-card" aria-label="音乐播放器界面" data-playing="false" data-track-active="false">
+                <span class="player-orb player-orb--violet" aria-hidden="true"></span>
+                <span class="player-orb player-orb--mint" aria-hidden="true"></span>
+                <div class="player-glass">
+                  <span class="player-pill">MUSIC</span>
+                  <div class="player-art" aria-hidden="true">
+                    <svg class="player-art__icon" viewBox="0 0 24 24"><use href="#i-music"/></svg>
+                    <img class="player-art__cover" data-player-art alt="" hidden>
+                  </div>
+                  <button class="player-title" type="button" data-music-open data-player-title aria-haspopup="dialog" aria-controls="music-window" aria-expanded="false" aria-label="音乐库，打开播放窗口">音乐库</button>
+                  <span class="player-meta" data-player-meta>SHUIKE ARCHIVE</span>
+                  <div class="player-controls">
+                    <button class="player-control" type="button" data-player-skip="prev" aria-label="上一首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 5v14l-9-7z"/></svg></button>
+                    <button class="player-control player-control--main" type="button" data-player-toggle aria-label="播放"><svg class="player-icon player-icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg><svg class="player-icon player-icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg></button>
+                    <button class="player-control" type="button" data-player-skip="next" aria-label="下一首"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 5v14l9-7z"/></svg></button>
+                  </div>
+                  <span class="sr-only" data-player-status aria-live="polite">已暂停</span>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+        </div>
+      </div>
+      <div class="side-rail-wrap" data-focus-hide>
+        <aside class="side-rail" aria-label="个人板块">
+          <section class="side-hero glass" aria-labelledby="side-mainline">
+            <div class="hero-topo" aria-hidden="true">
+              <div class="hero-topo-inner">
+                <svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <defs>
+                    <filter id="topo-warp" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+                      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.01" numOctaves="4" seed="27" result="noise"/>
+                      <feDisplacementMap in="SourceGraphic" in2="noise" scale="62" xChannelSelector="R" yChannelSelector="G"/>
+                    </filter>
+                  </defs>
+                  <g filter="url(#topo-warp)" fill="none" stroke="currentColor" stroke-width=".85">
+                    <g transform="rotate(-11 390 190)">
+                      <ellipse cx="390" cy="190" rx="44" ry="32"/>
+                      <ellipse cx="384" cy="184" rx="82" ry="58"/>
+                      <ellipse cx="402" cy="198" rx="124" ry="88"/>
+                      <ellipse cx="376" cy="180" rx="168" ry="122"/>
+                      <ellipse cx="410" cy="204" rx="218" ry="164"/>
+                      <ellipse cx="370" cy="176" rx="278" ry="212"/>
+                      <ellipse cx="420" cy="220" rx="342" ry="272"/>
+                    </g>
+                    <g transform="rotate(14 150 300)">
+                      <ellipse cx="150" cy="300" rx="36" ry="26"/>
+                      <ellipse cx="138" cy="286" rx="76" ry="56"/>
+                      <ellipse cx="166" cy="316" rx="118" ry="90"/>
+                      <ellipse cx="124" cy="280" rx="164" ry="128"/>
+                      <ellipse cx="178" cy="330" rx="218" ry="174"/>
+                    </g>
+                    <g transform="rotate(-18 555 340)">
+                      <ellipse cx="555" cy="340" rx="32" ry="24"/>
+                      <ellipse cx="570" cy="355" rx="68" ry="52"/>
+                      <ellipse cx="542" cy="326" rx="108" ry="84"/>
+                      <ellipse cx="580" cy="365" rx="150" ry="120"/>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <svg class="mainline-cube" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+              <g>
+                <polygon transform="rotate(45 100 100)" stroke-width="1" stroke="#d3a410" fill="none" points="70,70 148,50 130,130 50,150" class="cube-bounce"/>
+                <polygon transform="rotate(45 100 100)" stroke-width="1" stroke="#d3a410" fill="none" points="70,70 148,50 130,130 50,150" class="cube-bounce2"/>
+                <polygon transform="rotate(45 100 100)" stroke-width="2" fill="#414750" points="70,70 150,50 130,130 50,150"/>
+                <polygon stroke-width="2" fill="url(#cube-gradient-main)" points="100,70 150,100 100,130 50,100"/>
+                <defs>
+                  <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="cube-gradient-main">
+                    <stop stop-color="#1e2026" offset="20%"/>
+                    <stop stop-color="#414750" offset="60%"/>
+                  </linearGradient>
+                </defs>
+                <polygon transform="translate(20, 31)" stroke-width="2" fill="#b7870f" points="80,50 80,75 80,99 40,75"/>
+                <polygon transform="translate(20, 31)" stroke-width="2" fill="url(#cube-gradient-side)" points="40,-40 80,-40 80,99 40,75"/>
+                <defs>
+                  <linearGradient y2="100%" x2="0%" y1="-17%" x1="10%" id="cube-gradient-side">
+                    <stop stop-color="#d3a51000" offset="20%"/>
+                    <stop class="cube-glow-stop" stop-color="#d3a51054" offset="100%"/>
+                  </linearGradient>
+                </defs>
+                <polygon transform="rotate(180 100 100) translate(20, 20)" stroke-width="2" fill="#d3a410" points="80,50 80,75 80,99 40,75"/>
+                <polygon transform="rotate(0 100 100) translate(60, 20)" stroke-width="2" fill="url(#cube-gradient-side2)" points="40,-40 80,-40 80,85 40,110.2"/>
+                <defs>
+                  <linearGradient y2="100%" x2="10%" y1="0%" x1="0%" id="cube-gradient-side2">
+                    <stop stop-color="#d3a51000" offset="20%"/>
+                    <stop class="cube-glow-stop" stop-color="#d3a51054" offset="100%"/>
+                  </linearGradient>
+                </defs>
+                <polygon transform="rotate(45 100 100) translate(80, 95)" stroke-width="2" fill="#ffe4a1" points="5,0 5,5 0,5 0,0" class="cube-particle"/>
+                <polygon transform="rotate(45 100 100) translate(80, 55)" stroke-width="2" fill="#ccb069" points="6,0 6,6 0,6 0,0" class="cube-particle"/>
+                <polygon transform="rotate(45 100 100) translate(70, 80)" stroke-width="2" fill="#fff" points="2,0 2,2 0,2 0,0" class="cube-particle"/>
+                <polygon stroke-width="2" fill="#292d34" points="29.5,99.8 100,142 100,172 29.5,130"/>
+                <polygon transform="translate(50, 92)" stroke-width="2" fill="#1f2127" points="50,50 120.5,8 120.5,35 50,80"/>
+              </g>
+            </svg>
+            <div class="side-clock"><span class="flip-title flip-title--time" tabindex="0" aria-label="时间 / Time"><span class="flip-title__rotor" aria-hidden="true"><span class="flip-title__face flip-title__face--zh">时间</span><span class="flip-title__face flip-title__face--en" lang="en"><span>Time</span></span></span></span><time data-side-clock>--:--</time></div>
+            <div class="side-hero-body">
+              <span class="side-kicker">MAINLINE / 01</span>
+              <h2 id="side-mainline" class="flip-title flip-title--mainline" tabindex="0" aria-label="主线 / Main plot">
+                <span class="flip-title__rotor" aria-hidden="true">
+                  <span class="flip-title__face flip-title__face--zh">主线</span>
+                  <span class="flip-title__face flip-title__face--en" lang="en"><span>Main plot</span></span>
+                </span>
+              </h2>
+              <span class="side-hero-rule" aria-hidden="true"></span>
+            </div>
+          </section>
+          <div class="side-row side-row-pair">
+            <section class="side-card side-card--music glass" aria-labelledby="side-music">
+              <svg class="music-float" aria-hidden="true"><use href="#i-music"/></svg>
+              <span class="side-kicker">LIBRARY / 02</span>
+              <div class="music-loader" aria-hidden="true"><div class="loader"><span></span></div></div>
+              <h3 id="side-music" class="flip-title" tabindex="0" aria-label="音乐库 / Music library"><span class="flip-title__rotor" aria-hidden="true"><span class="flip-title__face flip-title__face--zh">音乐库</span><span class="flip-title__face flip-title__face--en" lang="en"><span>Music library</span></span></span></h3>
+              <button class="music-open-hit" type="button" data-music-open aria-haspopup="dialog" aria-controls="music-window" aria-expanded="false" aria-label="打开音乐库窗口"></button>
+            </section>
+            <a class="side-card side-profile glass" href="../index.html" aria-labelledby="side-personal" data-profile-link data-page-transition="off">
+              <span class="side-kicker">PERSONAL / 03</span>
+              <figure class="side-profile-photo">
+                <div class="side-profile-photo__window">
+                  <img src="../UI/photo/Mingyun.png" alt="明云 — 个人资料插画肖像" width="204" height="237" draggable="false" decoding="async">
+                </div>
+              </figure>
+              <h3 id="side-personal" class="flip-title" aria-label="个人资料 / Profile"><span class="flip-title__rotor" aria-hidden="true"><span class="flip-title__face flip-title__face--zh">个人资料</span><span class="flip-title__face flip-title__face--en" lang="en"><span>Profile</span></span></span></h3>
+            </a>
+          </div>
+          <div class="side-row side-row-blog">
+            <section class="side-card glass" aria-labelledby="side-blog">
+              <span class="side-kicker">JOURNAL / 04</span>
+              <svg class="blog-mark" aria-hidden="true"><use href="#i-blog"/></svg>
+              <h3 id="side-blog" class="flip-title" tabindex="0" aria-label="博客 / Blog"><span class="flip-title__rotor" aria-hidden="true"><span class="flip-title__face flip-title__face--zh">博客</span><span class="flip-title__face flip-title__face--en" lang="en"><span>Blog</span></span></span></h3>
+            </section>
+            <div class="side-panes" aria-hidden="true">
+              <div class="side-pane glass"></div>
+              <div class="side-pane glass"></div>
+            </div>
+          </div>
+          <div class="side-row side-row-bottom">
+            <section class="side-card side-days glass" aria-labelledby="side-days">
+              <span class="side-kicker">CALENDAR / 05</span>
+              <h3 id="side-days" class="flip-title" tabindex="0" aria-label="日历 / Calendar"><span class="flip-title__rotor" aria-hidden="true"><span class="flip-title__face flip-title__face--zh">日历</span><span class="flip-title__face flip-title__face--en" lang="en"><span>Calendar</span></span></span></h3>
+              <div class="side-date"><strong data-side-day>--</strong><span data-side-month>---</span></div>
+              <svg class="side-icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+            </section>
+            <div class="side-wide wide-stack glass">
+              <span class="wide-kicker flip-title flip-title--project" tabindex="0" aria-label="项目 / 07 / Projects / 07"><span class="flip-title__rotor" aria-hidden="true"><span class="flip-title__face flip-title__face--zh">项目 / 07</span><span class="flip-title__face flip-title__face--en" lang="en"><span>Projects / 07</span></span></span></span>
+              <div class="stack-cards" aria-hidden="true">
+                <div class="stack-card" data-text="Github" style="--r:-15">
+                  <svg viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                </div>
+                <div class="stack-card" data-text="Code" style="--r:5">
+                  <svg viewBox="0 0 640 512"><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg>
+                </div>
+                <div class="stack-card" data-text="Earn" style="--r:25">
+                  <svg viewBox="0 0 576 512"><path d="M64 64C28.7 64 0 92.7 0 128V384c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H64zm64 320H64V320c35.3 0 64 28.7 64 64zM64 192V128h64c0 35.3-28.7 64-64 64zM448 384c0-35.3 28.7-64 64-64v64H448zm64-192c-35.3 0-64-28.7-64-64h64v64zM288 160a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>
+                </div>
+              </div>
+            </div>
+            <section class="side-card side-github glass" aria-labelledby="side-github">
+              <span class="side-kicker">CODE / 06</span>
+              <a class="github-btn" href="https://github.com/Shui-Ke" target="_blank" rel="noopener noreferrer" aria-label="打开 Shui-Ke 的 GitHub">
+                <span class="github-btn-bg" aria-hidden="true"></span>
+                <span class="github-btn-face">
+                  <svg class="github-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.99 5.24.99 11.5c0 4.86 3.15 8.98 7.52 10.43.55.1.75-.24.75-.53v-2.1c-3.06.67-3.71-1.3-3.71-1.3-.5-1.28-1.22-1.62-1.22-1.62-1-.68.08-.67.08-.67 1.1.08 1.68 1.13 1.68 1.13.98 1.68 2.57 1.2 3.2.92.1-.71.38-1.2.7-1.48-2.44-.28-5.01-1.22-5.01-5.43 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.4.11-2.91 0 0 .92-.3 3.02 1.13a10.5 10.5 0 0 1 5.5 0c2.1-1.43 3.02-1.13 3.02-1.13.6 1.51.22 2.63.11 2.91.7.77 1.13 1.75 1.13 2.95 0 4.22-2.58 5.15-5.03 5.42.4.34.75 1.01.75 2.04v3.02c0 .29.2.64.76.53a10.52 10.52 0 0 0 7.51-10.42C23.01 5.24 18.27.5 12 .5z" fill="currentColor"/></svg>
+                </span>
+              </a>
+              <h3 id="side-github">GitHub</h3>
+            </section>
+          </div>
+        </aside>
+      </div>
+      <section class="topic-board" id="topic-board" data-topic-board data-focus-hide hidden aria-label="主题 / Topic">
+        <div class="topic-board__main">
+          <header class="topic-board__head">
+            <span class="side-kicker">TOPIC / 01</span>
+            <h2 class="topic-board__title">主题<span class="topic-board__en">Topic</span></h2>
+            <p class="topic-board__hint">选择背景主题</p>
+          </header>
+          <div class="topic-grid" role="group" aria-label="背景主题">
+            <button class="topic-thumb is-active" type="button" data-topic-pick="default" aria-pressed="true">
+              <span class="topic-thumb__frame topic-thumb__frame--default" aria-hidden="true"></span>
+              <span class="topic-thumb__label">默认<em>Default</em></span>
+            </button>
+            <button class="topic-thumb" type="button" data-topic-pick="desert" aria-pressed="false">
+              <span class="topic-thumb__frame" aria-hidden="true"><img src="../UI/Topic/黄沙旅馆.png" alt="" decoding="async"></span>
+              <span class="topic-thumb__label">黄沙旅馆<em>Desert Hotel</em></span>
+            </button>
+          </div>
+        </div>
+        <div class="topic-board__special">
+          <header class="topic-special__head">
+            <span class="side-kicker">SPECIAL / 02</span>
+            <h3 class="topic-special__title">特殊主题<span class="topic-board__en">Special</span></h3>
+            <p class="topic-special__hint">独立素材槽位，后续在此启用</p>
+          </header>
+          <div class="topic-special__slot">
+            <button class="topic-thumb topic-thumb--special" type="button" disabled aria-disabled="true">
+              <span class="topic-thumb__frame topic-thumb__frame--special" aria-hidden="true"><span class="topic-thumb__lock"></span></span>
+              <span class="topic-thumb__label">待启用<em>Locked</em></span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <audio class="music-audio" data-music-audio preload="none" aria-hidden="true"></audio>
+
+  <template id="music-track-template">
+    <li class="mw-track">
+      <div class="mw-track__row mw-grid">
+        <button class="mw-cover" type="button" data-mw-cover aria-label="播放">
+          <img alt="" decoding="async">
+          <span class="mw-cover__action" aria-hidden="true">
+            <svg class="mw-cover__play" viewBox="0 0 12 12"><path d="M4 2.1 9.3 6 4 9.9Z"/></svg>
+            <svg class="mw-cover__pause" viewBox="0 0 12 12"><path d="M4 2.2v7.6M8 2.2v7.6"/></svg>
+          </span>
+          <span class="mw-cover__load" aria-hidden="true"></span>
+          <span class="mw-cover__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <div class="mw-track__main">
+          <span class="mw-track__title"><span data-mw-row-title></span><span class="mw-eq" aria-hidden="true"><i></i><i></i><i></i></span></span>
+          <span class="mw-track__artist" data-mw-row-artist></span>
+        </div>
+        <div class="mw-track__actions">
+          <button class="mw-icon" type="button" data-mw-favorite aria-label="收藏" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mw-heart-shape" d="M12 20.2 4.7 13A4.7 4.7 0 0 1 11.4 6.4L12 7l.6-.6A4.7 4.7 0 0 1 19.3 13Z"/></svg>
+          </button>
+          <span class="mw-badge" role="img" aria-label="本地曲目">
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2.5 6.2 2.2 2.2 4.8-4.8"/></svg>
+          </span>
+        </div>
+        <span class="mw-track__album" data-mw-row-album></span>
+        <span class="mw-track__duration" data-mw-row-duration></span>
+        <span class="mw-track__size" data-mw-row-size></span>
+      </div>
+      <div class="mw-track__detail" data-mw-track-detail></div>
+    </li>
+  </template>
+
+  <dialog
+    class="music-window"
+    id="music-window"
+    data-music-window
+    data-skin="night"
+    aria-labelledby="music-window-title"
+    aria-describedby="music-window-desc"
+    aria-modal="false"
+    tabindex="-1"
+  >
+    <div class="music-window__frame" data-mw-frame>
+      <div class="mw-ambient" aria-hidden="true"></div>
+
+      <header class="mw-titlebar" data-mw-drag>
+        <div class="mw-lights" role="group" aria-label="窗口控制">
+          <button class="mw-light mw-light--close" type="button" data-mw-close aria-label="关闭音乐库窗口">
+            <svg viewBox="0 0 8 8" aria-hidden="true"><path d="M1.6 1.6 6.4 6.4M6.4 1.6 1.6 6.4"/></svg>
+          </button>
+          <button class="mw-light mw-light--minimize" type="button" data-mw-minimize aria-label="最小化音乐库并继续播放">
+            <svg viewBox="0 0 8 8" aria-hidden="true"><path d="M1.6 4h4.8"/></svg>
+          </button>
+          <button class="mw-light mw-light--zoom" type="button" data-mw-zoom aria-label="放大音乐库窗口">
+            <svg viewBox="0 0 8 8" aria-hidden="true"><path d="M1.7 4h4.6M4 1.7v4.6"/></svg>
+          </button>
+        </div>
+        <div class="mw-titlebar__center">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-music"/></svg>
+          <span id="music-window-title">音乐库</span>
+          <span class="mw-titlebar__sub">/ Music Library</span>
+        </div>
+        <div class="mw-titlebar__actions">
+          <button class="mw-theme" type="button" data-mw-theme aria-label="切换白天模式">
+            <svg class="mw-theme__sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/>
+            </svg>
+            <svg class="mw-theme__moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5 8.5 8.5 0 1 0 20.5 14.5z"/>
+            </svg>
+          </button>
+          <span class="mw-titlebar__count" data-mw-count>01 TRACK</span>
+        </div>
+      </header>
+
+      <div class="mw-hero">
+        <div class="mw-hero-copy">
+          <span class="mw-kicker">LIBRARY / 02</span>
+          <h2>音乐库 <em>Music library</em></h2>
+        </div>
+        <div class="mw-stats" aria-label="音乐库统计">
+          <span class="mw-stat"><strong data-mw-track-count>01</strong><span>TRACK</span></span>
+          <span class="mw-stat"><strong data-mw-total-size>2.9 MB</strong><span>LOCAL</span></span>
+        </div>
+      </div>
+
+      <div class="mw-columns mw-grid" aria-hidden="true">
+        <span></span>
+        <span>歌曲 / 歌手</span>
+        <span></span>
+        <span class="mw-col-album">专辑</span>
+        <span class="mw-col-duration">时长</span>
+        <span class="mw-col-size">大小</span>
+      </div>
+
+      <div class="mw-body" data-mw-scroll tabindex="0" role="region" aria-label="曲目列表，可用滚轮上下浏览">
+        <p class="mw-alert" data-mw-alert role="alert" hidden></p>
+        <ol class="mw-list" data-mw-list></ol>
+        <p class="mw-empty" data-mw-empty hidden>音乐库为空</p>
+
+        <section class="mw-archive" data-mw-archive aria-label="当前专辑信息">
+          <figure class="mw-archive__cover">
+            <img data-mw-archive-art alt="">
+          </figure>
+          <div class="mw-archive__body">
+            <span class="mw-kicker">ALBUM / LOCAL FILE</span>
+            <h3 data-mw-archive-title></h3>
+            <p class="mw-archive__artist" data-mw-archive-artist></p>
+            <dl>
+              <div><dt>FORMAT</dt><dd data-mw-archive-format>M4A</dd></div>
+              <div><dt>DURATION</dt><dd data-mw-archive-duration>02:05</dd></div>
+              <div><dt>SIZE</dt><dd data-mw-archive-size>2.9 MB</dd></div>
+              <div><dt>SOURCE</dt><dd>LOCAL</dd></div>
+            </dl>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mw-player">
+        <div class="mw-player__now">
+          <button class="mw-player__cover" type="button" data-mw-footer-cover aria-label="播放当前曲目">
+            <img data-mw-footer-art alt="">
+          </button>
+          <div class="mw-player__text">
+            <span class="mw-kicker">NOW PLAYING</span>
+            <strong class="mw-player__title" data-mw-now-title></strong>
+            <span class="mw-player__artist" data-mw-now-artist></span>
+            <span class="mw-player__state" data-mw-state>READY</span>
+          </div>
+        </div>
+        <div class="mw-transport" role="group" aria-label="播放控制">
+          <button class="mw-mode" type="button" data-mw-mode data-mode="list" aria-label="播放模式：列表循环，点击切换">
+            <svg class="mw-mode__icon mw-mode__icon--list" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.2 5h1.8a5 5 0 0 1 5 5v4a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-4a5 5 0 0 1 5-5h1.2"/>
+              <path d="M11 2.8 13.6 5.4 11 8"/>
+            </svg>
+            <svg class="mw-mode__icon mw-mode__icon--one" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14.2 5h1.8a5 5 0 0 1 5 5v4a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-4a5 5 0 0 1 5-5h1.2"/>
+              <path d="M11 2.8 13.6 5.4 11 8"/>
+              <path d="M11.2 11.6 13 10.2v5.8"/>
+            </svg>
+            <svg class="mw-mode__icon mw-mode__icon--shuffle" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 7h2.2c1.4 0 2.8.7 3.6 1.9l5.4 8.2c.8 1.2 2.2 1.9 3.6 1.9H21"/>
+              <path d="m18 16 3 3-3 3"/>
+              <path d="M3 19h2.2c1.4 0 2.8-.7 3.6-1.9l.9-1.4"/>
+              <path d="M14.3 8.9 16.2 6c.8-1.2 2.2-1.9 3.6-1.9H21"/>
+              <path d="m18 1 3 3-3 3"/>
+            </svg>
+          </button>
+          <button class="mw-transport__btn" type="button" data-mw-prev aria-label="上一首">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 5.5 9.4 12l8.6 6.5Z"/></svg>
+          </button>
+          <button class="mw-transport__main" type="button" data-mw-toggle aria-label="播放">
+            <svg class="mw-btn-icon mw-btn-icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7Z"/></svg>
+            <svg class="mw-btn-icon mw-btn-icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+          </button>
+          <button class="mw-transport__btn" type="button" data-mw-next aria-label="下一首">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 5.5 14.6 12 6 18.5Z"/></svg>
+          </button>
+        </div>
+        <div class="mw-progressrow">
+          <span class="mw-time" data-mw-elapsed>00:00</span>
+          <div class="mw-progress" data-mw-progress role="slider" tabindex="0" aria-label="播放进度" aria-valuemin="0" aria-valuemax="125" aria-valuenow="0" aria-valuetext="00:00 / 02:05" aria-orientation="horizontal">
+            <span class="mw-progress__track" aria-hidden="true"></span>
+            <span class="mw-progress__fill" aria-hidden="true"></span>
+            <span class="mw-progress__thumb" aria-hidden="true"></span>
+          </div>
+          <span class="mw-time mw-time--total" data-mw-total>02:05</span>
+        </div>
+        <p class="sr-only" data-mw-live role="status" aria-live="polite">已暂停</p>
+      </footer>
+    </div>
+  </dialog>
+
+  <p class="sr-only" id="music-window-desc">本地音乐库。使用滚轮或方向键上下浏览曲目，点击封面上的按钮播放或暂停。</p>
+</body>
+</html>
+

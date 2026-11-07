@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN" data-page-transition-entry="off">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070707">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="SHUIKE 的项目档案：在两道缓慢流动的波之间左右漫游，于波峰处展开项目简介与链接。">
+  <title>Project · SHUIKE</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/page-transition.css?v=20261025-projects">
+  <script src="../js/page-transition.js?v=20261025-projects"></script>
+  <link rel="preload" href="../fonts/Switzer-Semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="../js/theme-boot.js?v=20261016-theme"></script>
+  <link rel="stylesheet" href="projects.css?v=20261025-editor3">
+  <link rel="stylesheet" href="editor.css?v=20261025-editor3">
+  <script src="data.js?v=20261025-editor3" defer></script>
+  <script src="projects.js?v=20261025-editor3" defer></script>
+  <script src="editor.js?v=20261025-editor3" defer></script>
+  <noscript><style>.page-chrome,.page-foot,.wave-canvas,.project-layer,.year{visibility:hidden}</style></noscript>
+</head>
+<body class="is-booting">
+  <a class="skip-link" href="#project-stage">跳到项目档案</a>
+
+  <div class="atmosphere" aria-hidden="true"></div>
+
+  <header class="page-chrome">
+    <a class="brand" href="../index.html" aria-label="SHUIKE · 返回首页">
+      <svg class="brand-wave" viewBox="0 0 38 16" fill="none" aria-hidden="true">
+        <path d="M1 10.5c4.4 0 4.4-5 8.8-5s4.4 5 8.8 5 4.4-5 8.8-5 4.4 5 8.6 5"/>
+        <path d="M1 14c4.4 0 4.4-3 8.8-3s4.4 3 8.8 3 4.4-3 8.8-3 4.4 3 8.6 3"/>
+      </svg>
+      <span class="brand-copy">
+        <span class="brand-name">SHUIKE</span>
+        <span class="brand-section">/ PROJECT</span>
+      </span>
+    </a>
+
+    <div class="chrome-actions">
+      <button class="chrome-toggle project-admin" type="button" data-project-editor-open aria-haspopup="dialog" aria-controls="project-editor" aria-expanded="false" aria-label="打开项目编辑器，添加或修改项目" data-tooltip="添加 / 修改项目" hidden>
+        <svg class="chrome-icon project-admin__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" aria-hidden="true">
+          <path d="M4.4 19.6 5.2 15 16.3 3.9a2.25 2.25 0 0 1 3.2 3.2L8.4 18.2l-4 .9Z"/>
+          <path d="M14.7 5.5 18 8.8"/>
+          <path d="M18.1 15.2v4M16.1 17.2h4"/>
+        </svg>
+        <span class="project-admin__dot" aria-hidden="true"></span>
+      </button>
+
+      <button class="chrome-toggle" type="button" data-theme-toggle aria-label="切换至浅色模式">
+        <svg class="chrome-icon chrome-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.6"/>
+          <path d="M12 2.4v2M12 19.6v2M2.4 12h2M19.6 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/>
+        </svg>
+        <svg class="chrome-icon chrome-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" aria-hidden="true">
+          <path d="M20.2 14.8A8.3 8.3 0 0 1 9.2 3.8a8.4 8.4 0 1 0 11 11Z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="project-stage" id="project-stage" data-project-stage tabindex="-1" aria-label="项目档案" aria-describedby="stage-help">
+    <h1 class="sr-only">Project · SHUIKE 项目档案</h1>
+    <canvas class="wave-canvas" data-wave-canvas aria-hidden="true"></canvas>
+    <div class="project-layer" data-project-layer></div>
+  </main>
+
+  <footer class="page-foot">
+    <nav class="pager" aria-label="项目翻页">
+      <button class="pager__arrow" type="button" data-prev aria-label="上一个项目" disabled>
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M11 3.5 5.5 9l5.5 5.5"/>
+        </svg>
+      </button>
+      <p class="pager__count" aria-hidden="true">
+        <span data-current>01</span><i>/</i><span class="pager__total" data-total>04</span>
+      </p>
+      <span class="sr-only" data-pager-status>第 1 个项目，共 4 个</span>
+      <button class="pager__arrow" type="button" data-next aria-label="下一个项目">
+        <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="m7 3.5 5.5 5.5L7 14.5"/>
+        </svg>
+      </button>
+    </nav>
+
+    <p class="gesture" data-gesture aria-hidden="true">
+      <span class="gesture__line"></span>
+      <span class="gesture__desktop">SCROLL / DRAG</span>
+      <span class="gesture__touch">SWIPE</span>
+      <span class="gesture__arrows">← →</span>
+    </p>
+
+    <div class="archive-date" data-archive-date>
+      <div class="archive-date__top">
+        <button class="sync-button" type="button" data-vault-toggle aria-controls="date-vault" aria-expanded="false" aria-label="打开年份选择">
+          <svg class="sync-button__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <g transform="rotate(45 12 12)">
+              <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 0 0 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"></path>
+            </g>
+          </svg>
+        </button>
+        <p class="year" data-year-box aria-label="2026 年"><span class="year__value" data-year aria-hidden="true"></span><span class="year__month" data-year-month aria-hidden="true"></span><span class="year__caret" aria-hidden="true"></span></p>
+      </div>
+      <div class="month-strip" data-month-strip role="group" aria-label="按月份筛选项目"></div>
+    </div>
+  </footer>
+
+  <aside class="date-vault" id="date-vault" data-date-vault aria-labelledby="date-vault-title" aria-hidden="true" inert>
+    <span class="date-vault__glow" aria-hidden="true"></span>
+    <span class="date-vault__scan" aria-hidden="true"></span>
+    <div class="date-vault__inner">
+      <header class="date-vault__head">
+        <div class="date-vault__heading">
+          <p class="date-vault__kicker">CHRONO / ARCHIVE</p>
+          <h2 class="date-vault__title" id="date-vault-title">年份选择</h2>
+        </div>
+        <button class="date-vault__close" type="button" data-vault-close aria-label="关闭年份选择">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.15" aria-hidden="true">
+            <path d="M4.5 4.5l11 11M15.5 4.5l-11 11"/>
+          </svg>
+        </button>
+      </header>
+
+      <section class="year-console" aria-labelledby="vault-year-label">
+        <div class="vault-section-head">
+          <span id="vault-year-label">YEAR / 年份</span>
+          <span class="year-console__count" data-year-count>04 ENTRIES</span>
+        </div>
+        <div class="year-roller" data-year-roller role="listbox" tabindex="0" aria-label="年份。使用滚轮、拖动或上下方向键选择。">
+          <span class="year-roller__rail" aria-hidden="true"></span>
+          <div class="year-roller__window" data-year-window>
+            <div class="year-roller__track" data-year-track></div>
+          </div>
+          <span class="year-roller__slot" aria-hidden="true"></span>
+          <span class="year-roller__needle" aria-hidden="true"><i></i><i></i></span>
+          <span class="year-roller__wheel" aria-hidden="true"></span>
+        </div>
+        <p class="year-roller__hint"><span>WHEEL / TAP</span><span>↑ ↓</span></p>
+      </section>
+
+      <section class="month-console" aria-labelledby="vault-month-label">
+        <div class="vault-section-head">
+          <span id="vault-month-label">MONTH / 月份</span>
+          <button class="month-all" type="button" data-month-all aria-pressed="true">ALL</button>
+        </div>
+        <div class="month-grid" data-month-grid role="group" aria-label="按月份筛选项目"></div>
+      </section>
+
+      <footer class="date-vault__foot">
+        <span data-vault-status>2026 · 4 ENTRIES</span>
+        <span class="date-vault__seal" data-vault-seal aria-hidden="true">SHUIKE / 26</span>
+      </footer>
+    </div>
+  </aside>
+
+  <div class="date-vault-bloom" data-vault-bloom aria-hidden="true"></div>
+
+  <p class="sr-only" id="stage-help">项目分布在两道缓慢起伏的流线上，项目卡按顺序在上方与下方交替展开。使用滚轮、按住左键横向拖动或触屏左右滑动浏览；键盘可用左右方向键、Home 和 End。年份与月份可在右下角的时间控件和年份选择中筛选，当前项目的简介与链接在展开的项目卡内。</p>
+  <p class="sr-only" data-live role="status" aria-live="polite"></p>
+
+  <div data-project-editor-root></div>
+
+  <noscript>
+    <div class="noscript">
+      <p>项目档案需要 JavaScript 才能绘制波浪与展开项目。</p>
+      <a href="../index.html">返回首页</a>
+    </div>
+  </noscript>
+
+</body>
+</html>

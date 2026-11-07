@@ -1,0 +1,90 @@
+/* Theme tokens plus the bottom-left day/night switch.
+   Switch adapted from njesenberger / Uiverse; attribution and license: ../THIRD_PARTY_NOTICES.md */
+:root[data-theme="dark"]{
+  --background:#000;--foreground:#f5f5f5;--spt-veil:#000;
+  --grid-ink:#ced2d8;--grid-line:rgb(206 210 216 / 25%);
+  --grid-spot:#000;--grid-spot-mid:rgb(0 0 0 / 82%);--grid-spot-soft:rgb(0 0 0 / 42%);--grid-spot-faint:rgb(0 0 0 / 12%);
+  --veil-ink:#000;
+  --glass-bg:linear-gradient(130deg,rgb(255 255 255 / 7%),rgb(255 255 255 / 2.5%) 65%);
+  --glass-border:rgb(255 255 255 / 16%);--glass-active:rgb(255 255 255 / 30%);
+  --glass-line:rgb(255 255 255 / 5%);--glass-bar:linear-gradient(180deg,rgb(255 255 255 / 3%),rgb(255 255 255 / 1%));
+  --glass-shadow:inset 0 1px 0 rgb(255 255 255 / 3%),0 24px 80px rgb(0 0 0 / 45%);
+  --glass-shadow-active:inset 0 1px 0 rgb(255 255 255 / 5%),0 26px 90px rgb(0 0 0 / 56%);
+  --glass-edge:rgb(255 255 255 / 15%);--glass-edge-active:rgb(255 255 255 / 33%);
+  --glass-caption:#929295;--glass-text:#bcbcc0;
+  --focus-ring:#ddd;
+  --dock-shadow:inset 0 1px 0 rgb(255 255 255 / 10%),0 15px 40px rgb(0 0 0 / 53%);
+  --dock-base:linear-gradient(145deg,rgb(255 255 255 / 8%),rgb(255 255 255 / 3%)),rgb(27 27 29 / 52%);
+  --icon-border:rgb(255 255 255 / 17%);--icon-face-1:linear-gradient(145deg,#535358,#202023);--icon-ink:#d8d8db;
+  --dock-number:rgb(255 255 255 / 40%);--glass-fallback:rgb(20 20 22 / 95%);
+  --icon-art-2:linear-gradient(140deg,#67676b,#313136);--icon-art-2-ink:#d8d8db;
+  --icon-art-3:linear-gradient(140deg,#37373b,#161619);--icon-art-3-ink:#d8d8db;
+  --icon-art-4:linear-gradient(140deg,#202024,#0c0c0e);--icon-art-4-ink:#c9c9ce;
+  --icon-art-5:linear-gradient(140deg,#d4d4d6,#7b7b81);--icon-art-5-ink:#26262b;
+  --icon-reset:linear-gradient(145deg,#353539,#1c1c20);--icon-reset-ink:#ababaf;
+  --icon-back:linear-gradient(145deg,#e9e9eb,#929298);--icon-back-ink:#242428;
+  --icon-shadow:inset 0 1px 0 rgb(255 255 255 / 15%),0 3px 7px rgb(0 0 0 / 40%);
+  --status-open:#d9d9dc;--status-shadow:0 0 4px rgb(255 255 255 / 19%);
+  --tooltip-bg:rgb(41 41 45 / 92%);--tooltip-border:rgb(255 255 255 / 13%);--tooltip-ink:#eee;
+  --tooltip-shadow:0 4px 14px rgb(0 0 0 / 40%);
+  --drop-bg:rgb(70 70 74 / 40%);--drop-inset:rgb(255 255 255 / 40%);
+  --particle-color:#fff;--globe-glow:#fff;
+  --toggle-frame:linear-gradient(to bottom,#d5d5d5,#e8e8e8);--toggle-frame-shadow:0 1px 1px rgb(255 255 255 / 60%);
+  --toggle-track:#e8e8e8;--toggle-track-on:#f3b519;
+  --toggle-track-shadow:inset 0 0 .0625em .125em rgb(255 255 255 / 20%),inset 0 .0625em .125em rgb(0 0 0 / 40%);
+  --toggle-knob:#e8e8e8;
+  --toggle-knob-shadow:inset 0 -.0625em .0625em .125em rgb(0 0 0 / 10%),inset 0 -.125em .0625em rgb(0 0 0 / 20%),inset 0 .1875em .0625em rgb(255 255 255 / 30%),0 .125em .125em rgb(0 0 0 / 50%);
+  --toggle-dot:radial-gradient(circle at 50% 0,#f5f5f5,#c4c4c4);
+}
+:root[data-theme="light"]{
+  --background:#e9e9ec;--foreground:#111114;--spt-veil:#e9e9ec;
+  --grid-ink:#6c7078;--grid-line:rgb(108 112 120 / 32%);
+  --grid-spot:#fff;--grid-spot-mid:rgb(255 255 255 / 82%);--grid-spot-soft:rgb(255 255 255 / 42%);--grid-spot-faint:rgb(255 255 255 / 12%);
+  --veil-ink:#fff;
+  --glass-bg:linear-gradient(130deg,rgb(255 255 255 / 72%),rgb(255 255 255 / 42%) 65%);
+  --glass-border:rgb(20 20 24 / 14%);--glass-active:rgb(20 20 24 / 32%);
+  --glass-line:rgb(20 20 24 / 8%);--glass-bar:linear-gradient(180deg,rgb(255 255 255 / 60%),rgb(255 255 255 / 24%));
+  --glass-shadow:inset 0 1px 0 rgb(255 255 255 / 80%),0 24px 70px rgb(20 20 24 / 16%);
+  --glass-shadow-active:inset 0 1px 0 rgb(255 255 255 / 85%),0 26px 80px rgb(20 20 24 / 22%);
+  --glass-edge:rgb(20 20 24 / 12%);--glass-edge-active:rgb(20 20 24 / 38%);
+  --glass-caption:#5c5c63;--glass-text:#3c3c42;
+  --focus-ring:#242428;
+  --dock-shadow:inset 0 1px 0 rgb(255 255 255 / 80%),0 15px 38px rgb(20 20 24 / 18%);
+  --dock-base:linear-gradient(145deg,rgb(255 255 255 / 78%),rgb(255 255 255 / 46%)),rgb(233 233 236 / 34%);
+  --icon-border:rgb(20 20 24 / 16%);--icon-face-1:linear-gradient(145deg,#fdfdfe,#c9c9d0);--icon-ink:#26262b;
+  --dock-number:rgb(20 20 24 / 45%);--glass-fallback:rgb(250 250 252 / 92%);
+  --icon-art-2:linear-gradient(140deg,#e9e9ee,#b4b4bd);--icon-art-2-ink:#26262b;
+  --icon-art-3:linear-gradient(140deg,#d4d4da,#9c9ca6);--icon-art-3-ink:#1f1f24;
+  --icon-art-4:linear-gradient(140deg,#b6b6bf,#8c8c96);--icon-art-4-ink:#17171b;
+  --icon-art-5:linear-gradient(140deg,#4c4c54,#2a2a30);--icon-art-5-ink:#ececf1;
+  --icon-reset:linear-gradient(145deg,#ececf0,#c2c2ca);--icon-reset-ink:#2b2b31;
+  --icon-back:linear-gradient(145deg,#3b3b42,#1f1f24);--icon-back-ink:#f0f0f4;
+  --icon-shadow:inset 0 1px 0 rgb(255 255 255 / 70%),0 3px 7px rgb(20 20 24 / 18%);
+  --status-open:#3b3b42;--status-shadow:0 0 4px rgb(20 20 24 / 30%);
+  --tooltip-bg:rgb(252 252 254 / 95%);--tooltip-border:rgb(20 20 24 / 14%);--tooltip-ink:#26262b;
+  --tooltip-shadow:0 4px 14px rgb(20 20 24 / 20%);
+  --drop-bg:rgb(244 244 247 / 58%);--drop-inset:rgb(255 255 255 / 85%);
+  --particle-color:#26262b;--globe-glow:#26262b;
+  --toggle-frame:linear-gradient(to bottom,#e2e2e7,#f4f4f7);--toggle-frame-shadow:0 1px 1px rgb(255 255 255 / 80%);
+  --toggle-track:#d3d3da;--toggle-track-on:#e0b049;
+  --toggle-track-shadow:inset 0 0 .0625em .125em rgb(255 255 255 / 55%),inset 0 .0625em .125em rgb(20 20 24 / 22%);
+  --toggle-knob:#fafafd;
+  --toggle-knob-shadow:inset 0 -.0625em .0625em .125em rgb(20 20 24 / 8%),inset 0 -.125em .0625em rgb(20 20 24 / 14%),inset 0 .1875em .0625em rgb(255 255 255 / 85%),0 .125em .125em rgb(20 20 24 / 24%);
+  --toggle-dot:radial-gradient(circle at 50% 0,#fff,#cacad2);
+}
+/* The spotlight mask must dismiss the surface it sits on, so it follows --background. */
+.pointer-grid{--spotlight:radial-gradient(circle var(--grid-radius) at var(--pointer-x,-1000px) var(--pointer-y,-1000px),var(--grid-spot) 0%,var(--grid-spot-mid) 22%,var(--grid-spot-soft) 52%,var(--grid-spot-faint) 77%,transparent 100%);-webkit-mask-image:var(--spotlight);mask-image:var(--spotlight)}
+.intro-grid-veil{background:linear-gradient(90deg,var(--veil-ink) 42.5%,transparent 50%,var(--veil-ink) 57.5%)}
+.landing-menu{background:var(--drop-bg)}
+.landing-menu:after{box-shadow:inset 2px 2px 5px -2px var(--drop-inset),inset -2px -2px 5px 2px var(--drop-inset),inset 0 -2px 0 rgb(255 255 255 / 20%)}
+.menu-item{color:var(--menu-ink,rgb(255 255 255 / 90%))}
+:root[data-theme="light"] .menu-item{--menu-ink:#22222a}
+:root[data-theme="light"] .menu-item.active{background:rgb(28 28 34 / 85%);color:#f4f4f7}
+/* Switching repaints only the root surfaces, so the glass and canvas costs stay unchanged. */
+.theme-switching,.theme-switching body{transition:background-color 320ms ease,color 320ms ease}
+/* The day/night switch UI was removed for a redesign. The feature is untouched: the theme still
+   boots, persists and switches through window.ShuikeHome.theme.toggle(). The --toggle-* tokens in
+   both theme blocks above stay reserved so a new control can reuse them, or replace them outright.
+   A new theme control only has to set data-theme on <html> (or call ShuikeHome.theme.toggle());
+   adding the `theme-toggle` class to it makes js/theme.js manage its checkbox and aria-label again. */
+@media(prefers-reduced-motion:reduce){.theme-switching,.theme-switching body{transition:none}}

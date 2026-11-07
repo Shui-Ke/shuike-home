@@ -1,0 +1,507 @@
+/* CONTACT.DOSSIER content — slotted into <shuike-mac-window> on the Files desktop.
+   The Mac frame itself lives in js/mac-window.js; this file only styles the light-DOM page. */
+shuike-contact-dossier {
+  display: block;
+  min-height: 100%;
+}
+
+#contact {
+  scroll-margin-top: calc(var(--mast-h, 64px) + 20px);
+}
+
+@media (max-width: 720px) {
+  .contact {
+    margin-left: calc(var(--side-bay, 0px) * -1);
+  }
+}
+
+.contact-window[data-inline-zoom="true"] {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  margin: 0 !important;
+  z-index: 9000;
+  opacity: 1 !important;
+  transform: none !important;
+  --mac-width: 100vw !important;
+  --mac-body-height: calc(100dvh - 42px) !important;
+  --mw-shadow: none;
+}
+
+.contact-dossier {
+  --cd-ink: #eee9de;
+  --cd-muted: #9a9285;
+  --cd-line: rgb(238 233 222 / .14);
+  --cd-signal: #d8c39a;
+  --cd-button: rgb(255 255 255 / .035);
+  --cd-button-hover: rgb(216 195 154 / .09);
+  --cd-toast-bg: #17140f;
+  --cd-avatar-ring: rgb(216 195 154 / .08);
+  --cd-mono: "Cascadia Mono", "Cascadia Code", Consolas, monospace;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  padding: clamp(24px, 3.2vw, 36px);
+  color: var(--cd-ink);
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+}
+
+.contact-dossier__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+shuike-mac-window[data-theme="light"] .contact-dossier {
+  --cd-ink: #18150f;
+  --cd-muted: #6f6558;
+  --cd-line: rgb(24 21 15 / .16);
+  --cd-signal: #8f6a2b;
+  --cd-button: rgb(255 255 255 / .42);
+  --cd-button-hover: rgb(143 106 43 / .08);
+  --cd-toast-bg: #fbf6ec;
+  --cd-avatar-ring: rgb(143 106 43 / .12);
+}
+
+.contact-dossier__head {
+  display: grid;
+  grid-template-columns: 152px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 30px;
+  row-gap: 22px;
+  align-items: start;
+}
+
+.contact-dossier__avatar {
+  grid-row: 1 / 3;
+  width: 152px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  margin: 0;
+  padding: 5px;
+  border: 1px solid var(--cd-signal);
+  border-radius: 18px;
+  background: var(--cd-avatar-ring);
+  box-shadow: 0 18px 45px rgb(0 0 0 / .28);
+  transform: rotate(0deg) scale(1);
+  transform-origin: 52% 58%;
+  transition: transform .38s cubic-bezier(.16, 1, .3, 1), box-shadow .38s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact-dossier__avatar:hover {
+    transform: rotate(-2.4deg) scale(1.014);
+    box-shadow: 0 24px 52px rgb(0 0 0 / .36);
+  }
+}
+
+.contact-dossier__avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 13px;
+  object-fit: cover;
+  user-select: none;
+}
+
+.contact-dossier__identity {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.contact-dossier__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  color: var(--cd-muted);
+  font: 10px/1.4 var(--cd-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.contact-dossier__eyebrow i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--cd-signal);
+  box-shadow: 0 0 9px var(--cd-signal);
+}
+
+.contact-dossier__eyebrow span {
+  color: var(--cd-signal);
+}
+
+.contact-dossier__name {
+  margin: 0;
+  color: var(--cd-ink);
+  font-family: Switzer, Arial, "Microsoft YaHei", sans-serif;
+  font-size: clamp(38px, 5vw, 52px);
+  font-weight: 600;
+  font-style: normal;
+  font-synthesis: none;
+  letter-spacing: -.055em;
+  line-height: .92;
+}
+
+.contact-dossier__date {
+  margin: 12px 0 0;
+  color: var(--cd-signal);
+  font: 11px/1.4 var(--cd-mono);
+  letter-spacing: .16em;
+}
+
+.contact-dossier__copy {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+  max-width: 62ch;
+  color: var(--cd-muted);
+}
+
+.contact-dossier__copy p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.contact-dossier__copy p + p {
+  margin-top: 10px;
+}
+
+.contact-dossier__copy p:first-child {
+  color: var(--cd-ink);
+  opacity: .82;
+}
+
+.contact-dossier__foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: auto;
+  padding-top: 26px;
+  border-top: 1px solid var(--cd-line);
+}
+
+.contact-dossier__stars {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+}
+
+.contact-dossier__star {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  color: var(--cd-signal);
+}
+
+.contact-dossier__stars-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.contact-dossier__stars strong {
+  color: var(--cd-ink);
+  font-family: Switzer, Arial, sans-serif;
+  font-size: clamp(32px, 3.4vw, 42px);
+  font-weight: 600;
+  letter-spacing: -.05em;
+  line-height: .9;
+  font-variant-numeric: tabular-nums;
+}
+
+.contact-dossier__stars small {
+  color: var(--cd-muted);
+  font: 9px/1.4 var(--cd-mono);
+  letter-spacing: .16em;
+  white-space: nowrap;
+}
+
+.contact-dossier__actions {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.contact-dossier__action {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 1px solid var(--cd-line);
+  border-radius: 12px;
+  background: var(--cd-button);
+  color: var(--cd-ink);
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.contact-dossier__action svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.contact-dossier__action span {
+  color: var(--cd-muted);
+  font: 9px/1 var(--cd-mono);
+  letter-spacing: .08em;
+  transition: color .18s ease;
+}
+
+.contact-dossier__action:hover,
+.contact-dossier__action:focus-visible {
+  border-color: var(--cd-signal);
+  background: var(--cd-button-hover);
+  color: var(--cd-signal);
+}
+
+.contact-dossier__action:hover span,
+.contact-dossier__action:focus-visible span {
+  color: var(--cd-signal);
+}
+
+.contact-dossier__action:focus-visible {
+  outline: 1px solid var(--cd-signal);
+  outline-offset: 3px;
+}
+
+.contact-dossier__action[data-copied="true"] {
+  border-color: var(--cd-signal);
+  background: var(--cd-button-hover);
+  color: var(--cd-signal);
+}
+
+.contact-dossier__action[data-copied="true"] span {
+  color: var(--cd-signal);
+}
+
+.contact-dossier__action::after {
+  content: attr(data-feedback);
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  padding: 6px 9px;
+  border: 1px solid var(--cd-signal);
+  border-radius: 6px;
+  background: var(--cd-toast-bg);
+  box-shadow: 0 8px 22px rgb(0 0 0 / .28);
+  color: var(--cd-ink);
+  font: 11px/1.2 Arial, "Microsoft YaHei", sans-serif;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .22s ease, transform .22s ease;
+  pointer-events: none;
+}
+
+.contact-dossier__action[data-feedback-visible="true"]::after {
+  opacity: 1;
+  transform: none;
+}
+
+.contact-dossier__action:disabled {
+  cursor: default;
+}
+
+/* Zoomed Mac window: give the dossier more room without turning it into a different layout. */
+shuike-mac-window[zoomed] .contact-dossier {
+  padding: clamp(34px, 3.6vw, 52px);
+}
+
+shuike-mac-window[zoomed] .contact-dossier__head {
+  grid-template-columns: 210px minmax(0, 1fr);
+  column-gap: 42px;
+  row-gap: 26px;
+}
+
+shuike-mac-window[zoomed] .contact-dossier__avatar {
+  width: 210px;
+  padding: 6px;
+  border-radius: 22px;
+}
+
+shuike-mac-window[zoomed] .contact-dossier__avatar img {
+  border-radius: 16px;
+}
+
+shuike-mac-window[zoomed] .contact-dossier__name {
+  font-size: clamp(54px, 4.6vw, 68px);
+}
+
+shuike-mac-window[zoomed] .contact-dossier__date {
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+shuike-mac-window[zoomed] .contact-dossier__copy {
+  max-width: 68ch;
+}
+
+shuike-mac-window[zoomed] .contact-dossier__copy p {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+shuike-mac-window[zoomed] .contact-dossier__stars strong {
+  font-size: 52px;
+}
+
+shuike-mac-window[zoomed] .contact-dossier__star {
+  width: 32px;
+  height: 32px;
+}
+
+shuike-mac-window[zoomed] .contact-dossier__action {
+  width: 64px;
+  height: 64px;
+}
+
+@media (max-width: 620px) {
+  .contact-dossier {
+    padding: 22px;
+  }
+
+  .contact-dossier__head {
+    grid-template-columns: 92px minmax(0, 1fr);
+    column-gap: 18px;
+    row-gap: 18px;
+  }
+
+  .contact-dossier__avatar {
+    grid-row: 1;
+    width: 92px;
+    padding: 4px;
+    border-radius: 14px;
+  }
+
+  .contact-dossier__avatar img {
+    border-radius: 10px;
+  }
+
+  .contact-dossier__identity {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  .contact-dossier__copy {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .contact-dossier__eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .contact-dossier__name {
+    font-size: 38px;
+  }
+
+  .contact-dossier__date {
+    margin-top: 8px;
+    font-size: 10px;
+  }
+
+  .contact-dossier__copy p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .contact-dossier__foot {
+    gap: 16px;
+    padding-top: 20px;
+  }
+
+  .contact-dossier__stars {
+    gap: 10px;
+  }
+
+  .contact-dossier__star {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-dossier__stars strong {
+    font-size: 32px;
+  }
+
+  .contact-dossier__actions {
+    gap: 8px;
+  }
+
+  .contact-dossier__action {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+  }
+
+  .contact-dossier__action svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .contact-dossier__action span {
+    font-size: 8px;
+  }
+
+  shuike-mac-window[zoomed] .contact-dossier {
+    padding: 26px 22px;
+  }
+
+  shuike-mac-window[zoomed] .contact-dossier__head {
+    grid-template-columns: 112px minmax(0, 1fr);
+    column-gap: 20px;
+  }
+
+  shuike-mac-window[zoomed] .contact-dossier__avatar {
+    width: 112px;
+  }
+
+  shuike-mac-window[zoomed] .contact-dossier__name {
+    font-size: 44px;
+  }
+
+  shuike-mac-window[zoomed] .contact-dossier__copy p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  shuike-mac-window[zoomed] .contact-dossier__action {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-dossier__avatar {
+    transition: none;
+  }
+
+  .contact-dossier__avatar:hover {
+    transform: none;
+  }
+}

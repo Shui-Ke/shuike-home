@@ -1,0 +1,50 @@
+/* Settings layout and material surfaces. Source component styles are scoped separately. */
+#settings-dialog{position:fixed;inset:auto;margin:0;z-index:1002;padding:0;border:0;background:transparent;color:#fff;width:min(324px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);overflow:auto;border-radius:14px;box-shadow:0 24px 80px #0005;color-scheme:dark}
+#settings-dialog[open]{animation:settings-backdrop-in 260ms ease}
+@keyframes settings-backdrop-in{from{opacity:0}to{opacity:1}}
+#settings-dialog .glass-card{width:100%;min-height:520px;display:flex;flex-direction:column;border-color:#ffffff22;box-shadow:inset 0 1px 0 #ffffff15;background:rgb(36 36 36 / 82%)}
+#settings-dialog .divider{width:100%;margin:14px 0}
+#settings-dialog .header-dropdown{color:#eee;font-family:inherit}
+#settings-dialog .dropdown-menu{opacity:1;visibility:visible;transform:none;width:170px}
+#settings-dialog .dropdown-item{display:block;border:0;background:none;width:100%;text-align:left;font-family:inherit}
+#settings-dialog .dropdown-item.active{background:#ffffff18}
+#settings-dialog .dropdown-item:hover{background:#0a84ff}
+#settings-dialog .header-dropdown[aria-expanded="true"] .arrow-down{transform:rotate(180deg)}
+#settings-dialog .control-group{align-items:center;gap:12px}
+#settings-dialog .group-label{flex-shrink:0;margin:0;width:70px}
+#settings-dialog .material-preview-stage{flex:1;height:76px;border-radius:10px;position:relative;overflow:hidden;background:radial-gradient(circle at 65% 65%,#c3b49b,transparent 40%),linear-gradient(125deg,#84858c,#191a1f)}
+#settings-dialog .material-preview{position:absolute;inset:10px 14px;border-radius:8px;border:1px solid #ffffff40;overflow:hidden}
+#settings-dialog .material-preview span{display:block;height:14px;background:var(--glass-bar);border-bottom:1px solid #ffffff25}
+#settings-dialog .sliders-container{gap:13px}
+#settings-dialog .slider-row{gap:8px}
+#settings-dialog .slider-row label{width:70px;flex-shrink:0}
+#settings-dialog .slider-content{flex:1;min-width:0;padding-inline:8px;gap:8px}
+#settings-dialog .slider-wrapper,#settings-dialog .custom-slider{min-width:0}
+#settings-dialog .slider-value{min-width:26px;font-size:12px;text-align:right}
+#settings-dialog .slider-row:has(:disabled){opacity:.4}
+#settings-dialog .card-footer{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;margin-top:auto;padding-top:24px;padding-bottom:10px}
+/* FColombati / Uiverse: soft 3D button, compact charcoal palette in both themes. */
+#settings-dialog .reset-defaults{all:unset;cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative;isolation:isolate;border-radius:100em;font-size:14px;line-height:1.4;flex-shrink:0;background-color:rgb(0 0 0 / 75%);box-shadow:-.15em -.15em .15em -.075em rgb(5 5 5 / 25%),.0375em .0375em .0675em 0 rgb(5 5 5 / 10%)}
+#settings-dialog .reset-defaults::after{content:"";position:absolute;z-index:0;width:calc(100% + .3em);height:calc(100% + .3em);top:-.15em;left:-.15em;border-radius:inherit;background:linear-gradient(-135deg,rgb(5 5 5 / 50%),transparent 20%,transparent);filter:blur(.0125em);opacity:.25;mix-blend-mode:multiply;pointer-events:none}
+#settings-dialog .reset-defaults .button-outer{display:block;position:relative;z-index:1;border-radius:inherit;transition:box-shadow 300ms ease;box-shadow:0 .05em .05em -.01em #050505,0 .01em .01em -.01em rgb(5 5 5 / 50%),.15em .3em .1em -.01em rgb(5 5 5 / 25%)}
+#settings-dialog .reset-defaults:hover .button-outer{box-shadow:0 0 0 0 #050505,0 0 0 0 rgb(5 5 5 / 50%),0 0 0 0 rgb(5 5 5 / 25%)}
+#settings-dialog .reset-defaults .button-inner{display:block;position:relative;z-index:1;border-radius:inherit;padding:.8em 1.35em;background-image:linear-gradient(135deg,#1b1b1b,#141414);transition:box-shadow 300ms ease,clip-path 250ms ease,transform 250ms ease;overflow:clip;clip-path:inset(0 round 100em);box-shadow:0 0 0 0 inset rgb(5 5 5 / 10%),-.05em -.05em .05em 0 inset rgb(5 5 5 / 25%),0 0 0 0 inset rgb(5 5 5 / 10%),0 0 .05em .2em inset rgb(255 255 255 / 6%),.025em .05em .1em 0 inset rgb(255 255 255 / 14%),.12em .12em .12em inset rgb(255 255 255 / 6%),-.075em -.25em .25em .1em inset rgb(5 5 5 / 25%)}
+#settings-dialog .reset-defaults:hover .button-inner{clip-path:inset(clamp(1px,.0625em,2px) round 100em);box-shadow:.1em .15em .05em 0 inset rgb(5 5 5 / 75%),-.025em -.03em .05em .025em inset rgb(5 5 5 / 50%),.25em .25em .2em 0 inset rgb(5 5 5 / 50%),0 0 .05em .5em inset rgb(255 255 255 / 4%),0 0 0 0 inset rgb(255 255 255 / 14%),.12em .12em .12em inset rgb(255 255 255 / 6%),-.075em -.12em .2em .1em inset rgb(5 5 5 / 25%)}
+#settings-dialog .reset-defaults .button-inner span{position:relative;z-index:4;font-family:inherit;letter-spacing:-.05em;font-weight:500;color:transparent;background-image:linear-gradient(135deg,#dedede,#b8b8b8);-webkit-background-clip:text;background-clip:text;transition:transform 250ms ease;display:block;text-shadow:rgb(0 0 0 / 10%) 0 0 .1em;user-select:none}
+#settings-dialog .reset-defaults:hover .button-inner span,#settings-dialog .reset-defaults:active .button-inner{transform:scale(.975)}
+#settings-dialog .reset-defaults:focus-visible{outline:2px solid #0a84ff;outline-offset:5px}
+#settings-dialog .reset-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(prefers-reduced-motion:reduce){#settings-dialog .reset-defaults .button-outer,#settings-dialog .reset-defaults .button-inner,#settings-dialog .reset-defaults .button-inner span{transition:none}}
+#settings-dialog .theme-switch{--toggle-size:24px;display:block;position:relative;flex-shrink:0}
+#settings-dialog .theme-switch__checkbox{display:block;position:absolute;inset:0;width:100%;height:100%;opacity:0;z-index:2;cursor:pointer}
+#settings-dialog .theme-switch__checkbox:focus-visible + .theme-switch__container{outline:2px solid #0a84ff;outline-offset:5px}
+#settings-dialog .custom-slider:focus-visible{outline:2px solid white;outline-offset:-2px}
+:root{--surface-alpha:.08;--surface-blur:16px;--surface-depth:40px;--surface-offset:12px;--surface-shadow-alpha:.25;--surface-shine:.08;--surface-ink:255 255 255;--solid-base:45 46 50;--metal-top:115 117 125;--metal-low:39 40 45}
+:root[data-theme="light"]{--surface-ink:255 255 255;--solid-base:235 235 240;--metal-top:248 249 252;--metal-low:155 158 170}
+:root[data-material] .glass-panel,#settings-dialog .material-preview{background:linear-gradient(130deg,rgb(var(--surface-ink) / var(--surface-shine)),transparent 60%),rgb(var(--surface-ink) / var(--surface-alpha));backdrop-filter:blur(var(--surface-blur));-webkit-backdrop-filter:blur(var(--surface-blur));box-shadow:inset 0 1px 0 rgb(255 255 255 / var(--surface-shine)),0 var(--surface-offset) var(--surface-depth) rgb(0 0 0 / var(--surface-shadow-alpha))}
+:root[data-material="metal"] .glass-panel,:root[data-material="metal"] .material-preview{background:linear-gradient(120deg,rgb(255 255 255 / var(--surface-shine)),transparent 25%,rgb(255 255 255 / var(--surface-shine)) 47%,transparent 62%),repeating-linear-gradient(0deg,#ffffff08 0px,#ffffff08 1px,transparent 1px,transparent 3px),linear-gradient(145deg,rgb(var(--metal-top)),rgb(var(--metal-low)));backdrop-filter:none;-webkit-backdrop-filter:none;border-color:#aaaab066}
+:root[data-material="plastic"] .glass-panel,:root[data-material="plastic"] .material-preview{background:linear-gradient(160deg,rgb(255 255 255 / var(--surface-shine)),transparent 48%),rgb(var(--solid-base));backdrop-filter:none;-webkit-backdrop-filter:none;border-color:#ffffff30;box-shadow:inset 0 2px 3px #ffffff30,inset 0 -3px 5px #0003,0 var(--surface-offset) var(--surface-depth) rgb(0 0 0 / var(--surface-shadow-alpha))}
+:root[data-material="metal"] .window-bar{background:#ffffff10}
+:root[data-material="metal"] .window-name{color:var(--foreground)}
+@media(max-height:560px){#settings-dialog .glass-card{min-height:440px}#settings-dialog .sliders-container{gap:7px}#settings-dialog .divider{margin:8px 0}}
+@media(prefers-reduced-motion:reduce){#settings-dialog[open],#settings-dialog[open]::backdrop{animation:none}#settings-dialog *,#settings-dialog *::before,#settings-dialog *::after{transition:none!important}}

@@ -1,0 +1,13 @@
+/* Smit-Prajapati's black/gold card, adapted to an automatic signature.
+   Attribution and license: ../THIRD_PARTY_NOTICES.md */
+.intro-stage{display:none;position:fixed;inset:0;z-index:1100;pointer-events:none}
+.intro-pending .intro-stage,.intro-active .intro-stage{display:block}
+.intro-pending .home-title,.intro-pending #desktop,.intro-pending .window-dock{opacity:0}
+.intro-pending .pointer-grid,.intro-active .pointer-grid{opacity:0!important}
+.intro-grid{position:absolute;inset:0;opacity:0;overflow:hidden;background-image:linear-gradient(to right,var(--grid-line) 1.5px,transparent 1.5px),linear-gradient(to bottom,var(--grid-line) 1.5px,transparent 1.5px);background-size:var(--grid-step) var(--grid-step)}
+.intro-grid-veil{position:absolute;top:0;bottom:0;left:-100vw;width:300vw;transform:translateX(-75vw)}
+.intro-signature{--signature-gold:#bd9f67;position:absolute;left:50%;top:50%;width:300px;max-width:calc(100vw - 48px);height:200px;background:var(--background);border-radius:10px;display:grid;place-items:center;overflow:hidden;opacity:0;transform:translate(-50%,-50%);color:var(--signature-gold)}
+.signature-border{position:absolute;inset:0;border:2px solid var(--signature-gold);opacity:0;transform:rotate(10deg)}
+.signature-wordmark{position:relative;overflow:hidden;padding:8px 0;font-size:24px;font-weight:600;letter-spacing:-.035em;line-height:1.2;white-space:nowrap;clip-path:inset(0 100% 0 0)}
+.signature-trail{position:absolute;inset:0;background:linear-gradient(90deg,transparent 70%,#bd9f67);opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.intro-stage{display:none!important}.intro-pending .home-title,.intro-pending #desktop,.intro-pending .window-dock{opacity:1}}

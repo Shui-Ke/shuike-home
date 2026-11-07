@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark" data-page-transition-entry="off">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="SHUIKE 的计划星图：以长期方向为星群，以具体计划为星点，完成度让关联逐渐亮起。">
+  <title>Plans · 星图 — SHUIKE</title>
+  <script>
+    // The index page owns the cinematic solar handoff; do not replay the
+    // standalone Plans intro when this page is its destination.
+    if (new URLSearchParams(location.search).get('from') === 'home') {
+      document.documentElement.dataset.entry = 'home';
+    }
+  </script>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/page-transition.css?v=20261025-theme-veil">
+  <script src="../js/page-transition.js?v=20261025-theme-veil"></script>
+  <link rel="preload" href="../fonts/Switzer-Semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="plans.css?v=20261024-milkyway">
+  <link rel="stylesheet" href="personal-map.css?v=20261024-personal-map">
+  <noscript><style>.intro{display:none!important}</style></noscript>
+</head>
+<body class="is-loading">
+  <script>
+    // Paint the departure snapshot before loading the graph, then consume it once.
+    if (document.documentElement.dataset.entry === 'home') {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem('shuike-plans-handoff') || 'null');
+        sessionStorage.removeItem('shuike-plans-handoff');
+        if (saved && Date.now() - saved.created < 15000 && /^data:image\/png;base64,/.test(saved.image)) {
+          window.ShuikePlansHandoff = saved;
+          const still = document.createElement('img');
+          still.id = 'handoff-still'; still.alt = ''; still.setAttribute('aria-hidden', 'true');
+          still.src = saved.image;
+          still.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:1000;background:#000;pointer-events:none';
+          document.body.append(still);
+          setTimeout(() => still.remove(), 5000);
+        }
+      } catch (_) {}
+    }
+  </script>
+  <a class="skip-link" href="#plans-canvas">跳到星图</a>
+  <h1 class="sr-only">SHUIKE 计划星图</h1>
+
+  <div class="milky-way" id="milky-way" aria-hidden="true"></div>
+  <canvas class="page-stars" id="page-stars" aria-hidden="true"></canvas>
+  <div class="space-wash" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="app" id="app">
+    <aside class="index-pane" id="index-pane" aria-label="星图索引">
+      <header class="index-head">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 34 34" fill="none">
+              <circle cx="17" cy="17" r="3.1" fill="currentColor"/>
+              <ellipse cx="17" cy="17" rx="14" ry="6.1" stroke="currentColor" stroke-width="0.8" opacity=".55" transform="rotate(-27 17 17)"/>
+              <circle cx="28.4" cy="10.2" r="1.35" fill="currentColor"/>
+            </svg>
+          </span>
+          <div class="brand-copy">
+            <p class="brand-name">SHUIKE <span>/ PLANS</span></p>
+            <p class="brand-sub">我的计划星图</p>
+          </div>
+        </div>
+        <button class="square-btn index-collapse" id="index-collapse" type="button" aria-label="收起索引" aria-expanded="true" aria-controls="index-tree" title="收起索引">
+          <svg class="icon-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="m14 6-6 6 6 6M4 5v14"/>
+          </svg>
+          <svg class="icon-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="m10 6 6 6-6 6M20 5v14"/>
+          </svg>
+        </button>
+      </header>
+
+      <div class="index-meta">
+        <div class="index-meta-line"><span>INDEX</span><span>06 方向 · 19 任务</span></div>
+        <p>沿着一个方向，慢慢抵达。</p>
+      </div>
+
+      <nav class="index-tree" id="index-tree" aria-label="方向与任务树"></nav>
+
+      <footer class="index-foot">
+        <p class="index-edition">PLANS / 2026.10</p>
+        <a class="return-link" href="../index.html" aria-label="返回 SHUIKE 首页">
+          <span>返回首页</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="M5 12h13M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </footer>
+    </aside>
+    <button class="index-scrim" id="index-scrim" type="button" aria-label="关闭索引" hidden></button>
+
+    <main class="sky-workspace" aria-label="星辰区域">
+      <section class="map-frame" id="map-frame" aria-label="可交互任务星图">
+        <canvas
+          id="plans-canvas"
+          class="plans-canvas"
+          tabindex="0"
+          aria-label="交互式计划星图。左键拖动旋转视角，Ctrl 加左键或右键拖动平移，滚轮缩放，双击左键回到全景。悬停星点查看名称，点击星点展开计划详情。"
+          aria-describedby="canvas-help"
+        ></canvas>
+        <div class="node-layer" id="node-layer" aria-hidden="true"></div>
+        <div class="map-chrome" aria-hidden="true">
+          <span>03 / PLAN CONSTELLATION</span>
+          <span>DRAG TO ORBIT</span>
+        </div>
+        <span class="frame-corner is-tl" aria-hidden="true"></span>
+        <span class="frame-corner is-tr" aria-hidden="true"></span>
+        <span class="frame-corner is-bl" aria-hidden="true"></span>
+        <span class="frame-corner is-br" aria-hidden="true"></span>
+      </section>
+    </main>
+
+    <aside class="status-panel" id="status-panel" aria-label="任务状态">
+      <header class="status-head">
+        <div class="status-title">
+          <p class="eyebrow">MY JOURNEY</p>
+          旅程进度
+        </div>
+        <button class="square-btn status-collapse" id="status-collapse" type="button" aria-label="收起状态栏" aria-expanded="true" title="收起状态栏">
+          <span>收起</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="m10 6 6 6-6 6M20 5v14"/>
+          </svg>
+        </button>
+      </header>
+
+      <section class="status-summary" aria-label="任务完成概览">
+        <div class="donut-wrap">
+          <svg class="status-donut" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="donut-track" cx="60" cy="60" r="52"/>
+            <circle class="donut-done" id="pie-done" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="donut-center">
+            <strong id="pie-percent">32</strong><span>%</span>
+            <em>已完成</em>
+          </div>
+        </div>
+
+        <div class="summary-main">
+          <p class="eyebrow">TASK COMPLETION</p>
+          <h3><b id="summary-done">06</b><i>/</i><b id="summary-total">19</b><span>任务已完成</span></h3>
+          <p class="summary-sub"><b id="summary-doing">13</b> 项仍在进行 · 平均推进 <b id="summary-average">61</b>%</p>
+          <div class="summary-legend" aria-label="图例">
+            <span><i class="legend-swatch is-done"></i>已完成 <b id="legend-done">06</b></span>
+            <span><i class="legend-swatch"></i>进行中 <b id="legend-doing">13</b></span>
+          </div>
+        </div>
+
+        <div class="summary-side">
+          <div class="stat-block">
+            <span>全部任务</span>
+            <strong id="summary-total-side">19</strong>
+          </div>
+          <div class="stat-block">
+            <span>长期方向</span>
+            <strong id="summary-direction-count">06</strong>
+          </div>
+          <div class="stat-block">
+            <span>平均推进</span>
+            <strong><span id="summary-average-side">61</span><small>%</small></strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="mini-section" aria-label="星图缩略">
+        <div class="mini-head">
+          <span>MINI MAP</span>
+          <span>LIVE</span>
+        </div>
+        <div class="mini-frame">
+          <canvas id="mini-map" aria-hidden="true"></canvas>
+          <span class="mini-corner is-tl" aria-hidden="true"></span>
+          <span class="mini-corner is-br" aria-hidden="true"></span>
+        </div>
+        <p class="mini-note">中央星图的实时缩略；点击星点后，这里显示详情。</p>
+
+        <aside class="detail-panel" id="detail-panel" aria-labelledby="detail-title" aria-hidden="true" tabindex="-1">
+          <span class="detail-accent" aria-hidden="true"></span>
+          <div class="detail-inner">
+            <header class="detail-top">
+              <p class="detail-kicker" id="detail-kicker"></p>
+              <button class="detail-close" id="detail-close" type="button" aria-label="关闭详情" title="关闭详情">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18"/>
+                </svg>
+              </button>
+            </header>
+            <div class="detail-content" id="detail-content"></div>
+          </div>
+        </aside>
+      </section>
+
+
+    </aside>
+
+      <footer class="status-foot sky-controls">
+        <p class="gesture-hint">
+          <span class="hint-desktop">拖动旋转 · Ctrl + 拖动平移 · 滚轮缩放 · 点击星点查看计划</span>
+          <span class="hint-touch"><b>单指拖动</b>旋转 · <b>双指</b>缩放平移 · <b>轻点星点</b>展开</span>
+        </p>
+        <div class="legend" aria-label="星图图例">
+          <span class="legend-item"><i class="legend-ring" aria-hidden="true"></i>完成度</span>
+          <span class="legend-item"><i class="legend-ring is-done" aria-hidden="true"></i>已实现</span>
+          <span class="legend-item"><i class="legend-line" aria-hidden="true"></i>关联粒子</span>
+        </div>
+        <div class="view-controls">
+          <button class="square-btn" id="toggle-drift" type="button" aria-label="自动漂浮" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <ellipse cx="12" cy="12" rx="9" ry="4.2" transform="rotate(-24 12 12)"/>
+              <circle cx="12" cy="12" r="2.1" fill="currentColor" stroke="none"/>
+              <circle cx="19.1" cy="8.1" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+            <span class="view-label">
+              <span class="view-label-zh">漂浮</span>
+              <span class="view-label-en" aria-hidden="true">DRIFT</span>
+            </span>
+          </button>
+          <button class="square-btn" id="toggle-labels" type="button" aria-label="显示全部名称" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <path d="M4 7.5h9.5L20 12l-6.5 4.5H4z"/>
+              <circle cx="8" cy="12" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            <span class="view-label">
+              <span class="view-label-zh">名称</span>
+              <span class="view-label-en" aria-hidden="true">LABELS</span>
+            </span>
+          </button>
+          <button class="square-btn" id="reset-view" type="button" aria-label="回到全景">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+              <circle cx="12" cy="12" r="6.4"/>
+              <path d="M12 2.8v3M12 18.2v3M2.8 12h3M18.2 12h3"/>
+              <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+            </svg>
+            <span class="view-label">
+              <span class="view-label-zh">全景</span>
+              <span class="view-label-en" aria-hidden="true">OVERVIEW</span>
+            </span>
+          </button>
+        </div>
+      </footer>
+
+    <button class="status-tab" id="status-tab" type="button" aria-label="展开状态栏" title="展开状态栏" hidden>
+      <span>进度</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <path d="M14 6l-6 6 6 6"/>
+      </svg>
+    </button>
+    <button class="status-scrim" id="status-scrim" type="button" aria-label="关闭状态栏" hidden></button>
+  </div>
+
+  <p class="canvas-help sr-only" id="canvas-help">
+    星图中，中心是“我”，六个长期方向作为星群围绕中心，每个方向下分布着具体计划。
+    星点外的圆环表示完成度，已实现的计划会保持更亮的光晕。悬停或聚焦星点会显示名称并高亮关联，
+    点击可展开详情。双击左键回到全景。触屏设备可单指旋转、双指缩放与平移。键盘可用方向键旋转、加减号缩放、0 键回到全景。
+  </p>
+
+  <section class="intro" id="intro" aria-label="Plans 进场动画" role="dialog" aria-modal="true">
+    <canvas id="intro-canvas" aria-hidden="true"></canvas>
+    <div class="intro-ui">
+      <div class="intro-top">
+        <div class="intro-brand"><i aria-hidden="true"></i><span>SHUIKE / PLANS</span></div>
+        <div class="intro-meta">SOLAR ENTRY / 001</div>
+      </div>
+      <div class="intro-bottom">
+        <div class="intro-copy">
+          <p class="intro-stage" id="intro-stage">01 / SOL</p>
+          <p class="intro-caption" id="intro-caption" role="status" aria-live="polite">行星隐去，只留下太阳</p>
+        </div>
+        <div class="intro-readout">
+          <div class="intro-count" aria-hidden="true"><span id="intro-percent">000</span><i>%</i></div>
+          <button class="intro-skip" id="intro-skip" type="button">跳过 / SKIP</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fallback" id="fallback" hidden aria-label="计划列表">
+    <div class="fallback-card">
+      <p class="fallback-kicker">PLANS · FALLBACK</p>
+      <h2>星图暂时无法绘制</h2>
+      <p class="fallback-copy">当前浏览器没有可用的 WebGL。下面是星图里的全部方向与计划，内容仍然可以阅读。</p>
+      <div id="fallback-content"></div>
+      <a class="fallback-link" href="../index.html">返回首页</a>
+    </div>
+  </section>
+
+  <div class="sr-only" id="live" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <div class="noscript">
+      <p>计划星图需要 JavaScript 与 WebGL。</p>
+      <a href="../index.html">返回首页</a>
+    </div>
+  </noscript>
+
+  <script src="vendor/three.min.js" defer></script>
+  <script src="data.js?v=20261024-intro8" defer></script>
+  <script src="intro.js?v=20261024-personal-map" defer></script>
+  <script src="arrival.js?v=20261024-personal-map" defer></script>
+  <script src="plans.js?v=20261024-milkyway" defer></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

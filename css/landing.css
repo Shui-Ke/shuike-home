@@ -1,0 +1,17 @@
+/* Bottom glass menu adapted from mymiamo / Uiverse; see THIRD_PARTY_NOTICES.md. */
+[data-solar-dragging="true"],[data-solar-dragging="true"] *{cursor:grabbing!important;user-select:none}
+.landing-menu{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:calc(100% - 32px);max-width:520px;display:flex;justify-content:center;gap:8px;padding:8px;border:1px solid #ffffff38;border-radius:99rem;background:rgba(70,70,74,.404);backdrop-filter:blur(12px) saturate(180%) contrast(200%);-webkit-backdrop-filter:blur(12px) saturate(180%) contrast(200%);box-shadow:0 10px 30px #0004;z-index:950;opacity:0;visibility:hidden}
+.landing-menu:after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 2px 2px 5px -2px #ffffff66,inset -2px -2px 5px 2px #ffffff66,inset 0 -2px 0 #ffffff33;pointer-events:none}
+.landing-ready .landing-menu{opacity:1;visibility:visible}
+.menu-item{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1 1 0;min-width:0;border:0;background:transparent;color:#ffffffe6;padding:10px 6px;border-radius:999rem;text-decoration:none;transition:background .18s ease,color .18s ease,transform .18s ease,box-shadow .3s ease;cursor:pointer}
+.menu-item svg{width:23px;height:23px;flex-shrink:0}.menu-item span{font-size:12px;font-weight:600;line-height:1;margin-top:5px}
+.menu-item:hover:not(:disabled),.menu-item:focus-visible{background:#ffffff4d;box-shadow:inset 2px 2px 5px -2px #ffffff66,inset -2px -1px 5px #ffffff66,inset 0 -2px 0 #ffffff33;color:#f5f5f5;transform:rotate(2.2deg)}
+.menu-item.active{background:#ededed99;color:#242426}.menu-item:active:not(:disabled){transform:scale(.98)}
+.menu-item:disabled{opacity:.45;cursor:default}
+/* Visibility preserves measurable window bounds and all desktop state. */
+[data-view="landing"] #desktop,[data-view="landing"] .window-dock,
+[data-view="entering"] #desktop,[data-view="entering"] .window-dock{visibility:hidden;opacity:0;pointer-events:none}
+[data-view="desktop"] .landing-menu,[data-view="leaving"] .landing-menu{visibility:hidden;opacity:0;pointer-events:none}
+.dock-back .dock-icon{background:linear-gradient(145deg,#e9e9eb,#929298);color:#242428}.dock-back:after{display:none!important}
+@media(max-width:420px){.window-dock{gap:2px}.dock-button{width:36px}.dock-icon{width:32px;height:32px}.dock-icon svg{width:21px;height:21px}.landing-menu{gap:3px;padding:6px;bottom:calc(18px + env(safe-area-inset-bottom,0px))}.menu-item{padding:10px 3px}.menu-item span{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.menu-item{transition:none}}

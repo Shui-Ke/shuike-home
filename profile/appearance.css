@@ -1,0 +1,76 @@
+/* Frosted-glass skin shared with the Settings appearance controls in index.html.
+   --surface-* and data-material are written by appearance.js with the same mapping
+   used by js/settings.js; material values are kept in sync with css/settings.css. */
+:root{
+  --surface-alpha:.08;--surface-blur:16px;--surface-depth:40px;--surface-offset:12px;--surface-shadow-alpha:.25;--surface-shine:.08;
+  --surface-ink:255 255 255;--solid-base:45 46 50;--metal-top:115 117 125;--metal-low:39 40 45;
+  --glass-edge:rgb(255 255 255 / .18);--glass-fallback:rgb(25 30 34 / .92);
+  --p-glass-bg:linear-gradient(130deg,rgb(var(--surface-ink) / var(--surface-shine)),transparent 62%),rgb(var(--surface-ink) / var(--surface-alpha));
+  --p-glass-border:var(--glass-edge);
+  --p-glass-blur:blur(var(--surface-blur));
+  --p-glass-shadow:inset 0 1px 0 rgb(255 255 255 / var(--surface-shine)),0 var(--surface-offset) var(--surface-depth) rgb(0 0 0 / var(--surface-shadow-alpha));
+  --p-glass-shadow-sm:inset 0 1px 0 rgb(255 255 255 / var(--surface-shine)),0 6px 20px rgb(0 0 0 / calc(var(--surface-shadow-alpha) * .7))
+}
+
+:root[data-theme=light]{
+  --surface-ink:255 255 255;--solid-base:235 235 240;--metal-top:248 249 252;--metal-low:155 158 170;
+  --glass-edge:rgb(20 20 24 / .16);--glass-fallback:rgb(250 250 252 / .94)
+}
+
+:root[data-material=metal]{
+  --p-glass-bg:linear-gradient(120deg,rgb(255 255 255 / var(--surface-shine)),transparent 25%,rgb(255 255 255 / var(--surface-shine)) 47%,transparent 62%),repeating-linear-gradient(0deg,#ffffff08 0px,#ffffff08 1px,transparent 1px,transparent 3px),linear-gradient(145deg,rgb(var(--metal-top)),rgb(var(--metal-low)));
+  --p-glass-border:#aaaab066;
+  --p-glass-blur:none;
+  --p-glass-shadow:inset 0 1px 0 rgb(255 255 255 / .25),0 var(--surface-offset) var(--surface-depth) rgb(0 0 0 / var(--surface-shadow-alpha));
+  --p-glass-shadow-sm:inset 0 1px 0 rgb(255 255 255 / .3),0 5px 16px rgb(0 0 0 / calc(var(--surface-shadow-alpha) * .7))
+}
+
+:root[data-material=plastic]{
+  --p-glass-bg:linear-gradient(160deg,rgb(255 255 255 / var(--surface-shine)),transparent 48%),rgb(var(--solid-base));
+  --p-glass-border:#ffffff30;
+  --p-glass-blur:none;
+  --p-glass-shadow:inset 0 2px 3px #ffffff30,inset 0 -3px 5px #0003,0 var(--surface-offset) var(--surface-depth) rgb(0 0 0 / var(--surface-shadow-alpha));
+  --p-glass-shadow-sm:inset 0 1px 1px #ffffff30,inset 0 -2px 3px #0003,0 5px 16px rgb(0 0 0 / calc(var(--surface-shadow-alpha) * .7))
+}
+
+.glass{
+  border:1px solid var(--p-glass-border);
+  background:var(--p-glass-bg);
+  -webkit-backdrop-filter:var(--p-glass-blur);
+  backdrop-filter:var(--p-glass-blur);
+  box-shadow:var(--p-glass-shadow)
+}
+
+.glass-sm{box-shadow:var(--p-glass-shadow-sm)}
+
+/* Flat black stage; glass edges supply the depth. */
+.terminal-shell{
+  background:var(--surface)
+}
+
+.news-panel .ticker{
+  border:1px solid rgb(255 255 255 / .3);
+  border-radius:9px;
+  background:
+    linear-gradient(180deg,rgb(255 255 255 / .2),transparent 18%,transparent 82%,rgb(0 0 0 / .16)),
+    repeating-linear-gradient(115deg,transparent 0 22px,rgb(255 255 255 / .05) 22px 23px),
+    linear-gradient(180deg,rgb(233 0 30 / .84) 0%,rgb(233 0 30 / .72) 48%,rgb(181 0 22 / .88) 100%);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  box-shadow:inset 0 1px 0 rgb(255 255 255 / .3),0 10px 28px rgb(233 0 30 / .2)
+}
+
+.gallery.glass{
+  border-radius:16px;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none
+}
+
+.gallery.glass .gallery__edge{
+  border-radius:10px
+}
+
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root[data-material=glass] .glass{background:var(--glass-fallback)}
+  .news-panel .ticker{background:linear-gradient(180deg,var(--ticker-red-light),var(--ticker-red) 48%,var(--ticker-red-dark))}
+}

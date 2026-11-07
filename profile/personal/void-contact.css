@@ -1,0 +1,71 @@
+/* =========================================================
+   00 — CONTACT BLOCK
+   Replaces the old Mingyun companion in the bottom-left lane with plain,
+   selectable contact details. Labels use the signal colour, values use
+   ink-soft; both follow the day / night tokens automatically.
+   ========================================================= */
+
+.void-contact {
+  position: fixed;
+  z-index: 86;
+  left: clamp(10px, 2vw, 28px);
+  bottom: clamp(16px, 3vh, 34px);
+  width: min(300px, calc(var(--char-w) + 24px));
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: clamp(10px, .8vw, 12px);
+  line-height: 1.9;
+  letter-spacing: .04em;
+  pointer-events: auto;
+}
+
+.void-contact__line {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.void-contact__key {
+  color: var(--signal);
+  letter-spacing: .12em;
+}
+
+.void-contact__sep {
+  margin: 0 .45em;
+  color: var(--muted-dark);
+}
+
+.void-contact a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+
+.void-contact a:hover,
+.void-contact a:focus-visible {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
+}
+
+.void-contact a:focus-visible {
+  outline: 1px solid var(--signal);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .void-contact {
+    left: 14px;
+    bottom: 14px;
+    width: min(250px, calc(100vw - 28px));
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .void-contact a {
+    transition: none;
+  }
+}

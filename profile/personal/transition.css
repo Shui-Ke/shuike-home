@@ -1,0 +1,336 @@
+/* Profile → Personal page transition.
+   The curtain borrows the terminal surface colour, so it matches the black
+   (night) or grey (day) canvas. Five gold bars grow up from one hairline at
+   the bottom; the left pair is joined at the top, the right trio at the base. */
+
+:root {
+  --pt-gold-hi:#f7ead0;
+  --pt-gold:#ddc596;
+  --pt-gold-lo:#b08c55;
+  --pt-line:#f7ead0;
+  --pt-gold-glow:rgb(221 197 150 / .13);
+  --pt-edge-hairline:rgb(232 211 173 / .55);
+  --pt-edge-shadow:0 -24px 70px rgb(0 0 0 / .38)
+}
+
+:root[data-theme=light] {
+  --pt-gold-hi:#c39d63;
+  --pt-gold:#9f7845;
+  --pt-gold-lo:#6b4f2b;
+  --pt-line:#6b4f2b;
+  --pt-gold-glow:rgb(128 99 59 / .11);
+  --pt-edge-hairline:rgb(128 99 59 / .45);
+  --pt-edge-shadow:0 -24px 70px rgb(31 38 135 / .14)
+}
+
+html.pt-running {
+  overflow:hidden
+}
+
+.pt-layer {
+  position:fixed;
+  inset:0;
+  z-index:10001;
+  pointer-events:auto
+}
+
+.pt-mask,
+.pt-cover {
+  background-color:var(--surface);
+  background-image:radial-gradient(52% 46% at 50% 50%,var(--pt-gold-glow),transparent 72%);
+  box-shadow:0 -1px 0 var(--pt-edge-hairline),var(--pt-edge-shadow)
+}
+
+.pt-mask {
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  transform:translate3d(0,100%,0);
+  will-change:transform;
+  pointer-events:auto;
+  cursor:progress;
+  user-select:none
+}
+
+/* Full-intro entries (home, demos, photo, direct URL) start with the cover
+   below the viewport and climb over the page; a profile-card entry is the
+   continuation of the mask that already rose on the terminal. */
+.pt-cover {
+  position:fixed;
+  inset:0;
+  z-index:10001;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  transform:translate3d(0,0,0);
+  will-change:transform;
+  pointer-events:auto;
+  cursor:progress;
+  user-select:none;
+  background-color:#000;
+  animation:pt-cover-failsafe 1ms 6s forwards
+}
+
+:root[data-theme=light] .pt-cover {
+  background-color:#e2e4de
+}
+
+/* The profile transition already played the rise + logo, so the destination
+   cover waits fully closed and only performs the pull-down half. */
+html.pt-continuation .pt-cover {
+  transform:translate3d(0,0,0)
+}
+
+/* Solid stage under the full-intro curtain. It is present at first paint so
+   the page underneath is never visible before the climb. */
+.pt-shield {
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  background-color:var(--surface);
+  pointer-events:auto;
+  cursor:progress
+}
+
+html.pt-full-intro .pt-shield {
+  display:block;
+  animation:pt-shield-failsafe 1ms 6s forwards
+}
+
+@keyframes pt-shield-failsafe {
+  to { opacity:0; visibility:hidden }
+}
+
+/* The intro now starts on a closed black cover: no upward covering motion.
+   Javascript builds the GM mark on this stage and then pulls the cover down. */
+html.pt-full-intro .pt-cover {
+  animation:pt-cover-failsafe 1ms 6s forwards
+}
+
+html.pt-full-intro .pt-cover .pt-logo--static {
+  opacity:0
+}
+
+/* When the cover is a continuation of the terminal's mask, keep the exact
+   profile surface colour for a seamless handoff; direct opens use the
+   dossier's own --surface instead. */
+html.pt-from-profile .pt-cover {
+  background-color:#000
+}
+
+html[data-theme=light].pt-from-profile .pt-cover {
+  background-color:#e2e4de
+}
+
+@keyframes pt-cover-failsafe {
+  to { opacity:0; visibility:hidden }
+}
+
+.pt-logo-wrap {
+  position:relative;
+  display:grid;
+  place-items:center;
+  transform:translateY(-1.5%)
+}
+
+.pt-logo {
+  display:block;
+  width:clamp(132px,14vw,180px);
+  height:auto;
+  overflow:visible;
+  filter:drop-shadow(0 10px 30px rgb(0 0 0 / .28));
+  transition:filter .8s var(--ease)
+}
+
+:root[data-theme=light] .pt-logo {
+  filter:drop-shadow(0 10px 26px rgb(80 64 40 / .18))
+}
+
+.pt-mask.is-complete .pt-logo,
+.pt-cover .pt-logo {
+  filter:drop-shadow(0 0 16px var(--pt-gold-glow)),drop-shadow(0 10px 30px rgb(0 0 0 / .3))
+}
+
+:root[data-theme=light] .pt-mask.is-complete .pt-logo,
+:root[data-theme=light] .pt-cover .pt-logo {
+  filter:drop-shadow(0 0 14px var(--pt-gold-glow)),drop-shadow(0 10px 26px rgb(80 64 40 / .2))
+}
+
+.pt-gold-stop--hi {
+  stop-color:var(--pt-gold-hi)
+}
+
+.pt-gold-stop--mid {
+  stop-color:var(--pt-gold)
+}
+
+.pt-gold-stop--lo {
+  stop-color:var(--pt-gold-lo)
+}
+
+/* The single hairline is drawn first, left to right; the bars then rise
+   from its top edge. */
+.pt-logo-base {
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:left center;
+  transform:scaleX(.02);
+  fill:var(--pt-line);
+  stroke:none;
+  pointer-events:none
+}
+
+.pt-mask.is-assembling .pt-logo-base,
+.pt-cover.is-assembling .pt-logo-base {
+  animation:pt-base-in 300ms cubic-bezier(.2,.8,.2,1) both
+}
+
+@keyframes pt-base-in {
+  0% { opacity:0; transform:scaleX(.02) }
+  45% { opacity:1 }
+  100% { opacity:1; transform:scaleX(1) }
+}
+
+.pt-bar {
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:var(--pt-origin,center);
+  stroke:var(--pt-gold-hi);
+  stroke-opacity:.18;
+  stroke-width:.45;
+  stroke-linejoin:miter
+}
+
+:root[data-theme=light] .pt-bar {
+  stroke:rgb(78 58 31 / .38);
+  stroke-opacity:1;
+  stroke-width:.5
+}
+
+.pt-bar--x {
+  transform:scaleX(.04)
+}
+
+.pt-bar--y {
+  transform:scaleY(.04)
+}
+
+.pt-mask.is-assembling .pt-bar,
+.pt-cover.is-assembling .pt-bar {
+  animation:pt-bar-x 360ms cubic-bezier(.18,.74,.2,1) var(--pt-delay,0ms) both
+}
+
+.pt-mask.is-assembling .pt-bar--y,
+.pt-cover.is-assembling .pt-bar--y {
+  animation-name:pt-bar-y
+}
+
+@keyframes pt-bar-x {
+  0% { opacity:0; transform:scaleX(.04) }
+  58% { opacity:1 }
+  76% { transform:scaleX(1.05) }
+  100% { opacity:1; transform:scaleX(1) }
+}
+
+@keyframes pt-bar-y {
+  0% { opacity:0; transform:scaleY(.04) }
+  58% { opacity:1 }
+  76% { transform:scaleY(1.05) }
+  100% { opacity:1; transform:scaleY(1) }
+}
+
+/* Final / static states: the assembled logo, the reduced-motion path and the
+   destination cover all use the same completed geometry. */
+.pt-mask.is-complete .pt-bar,
+.pt-mask.is-reduced .pt-bar,
+.pt-cover:not(.is-intro) .pt-bar,
+.pt-cover.is-complete .pt-bar,
+.pt-logo--static .pt-bar {
+  opacity:1;
+  transform:none;
+  animation:none
+}
+
+.pt-mask.is-complete .pt-logo-base,
+.pt-mask.is-reduced .pt-logo-base,
+.pt-cover:not(.is-intro) .pt-logo-base,
+.pt-cover.is-complete .pt-logo-base,
+.pt-logo--static .pt-logo-base {
+  opacity:1;
+  transform:none;
+  animation:none
+}
+
+/* On a full-intro entry the page itself waits offstage while the curtain
+   climbs: only the atmospheric background is visible. The content is then
+   pulled down and faded in as the curtain descends. The long-delay keyframe
+   is a no-JS/no-script fallback so the content can never stay hidden. */
+html.pt-full-intro body.dossier-page .masthead,
+html.pt-full-intro body.dossier-page .page,
+html.pt-full-intro body.dossier-page .scroll-meter,
+html.pt-full-intro body.dossier-page .companion {
+  opacity:0;
+  animation:pt-page-failsafe 1ms 6s forwards
+}
+
+@keyframes pt-page-failsafe {
+  to { opacity:1 }
+}
+
+/* The dossier is held above its resting place and is pulled down together
+   with the cover, so each newly exposed strip already carries the page.
+   These two classes exist only on the transition path. */
+@media(prefers-reduced-motion:no-preference) {
+  html.pt-page-enter body.dossier-page .masthead {
+    opacity:0;
+    transition:none
+  }
+
+  html.pt-page-enter body.dossier-page .page {
+    opacity:0;
+    transform:translate3d(0,-96px,0);
+    transition:none
+  }
+
+  html.pt-page-enter body.dossier-page .scroll-meter,
+  html.pt-page-enter body.dossier-page .companion {
+    opacity:0;
+    transform:translate3d(0,-24px,0);
+    transition:none
+  }
+
+  html.pt-page-enter.pt-revealing body.dossier-page .masthead {
+    opacity:1;
+    transition:opacity 900ms cubic-bezier(.6,0,.35,1)
+  }
+
+  html.pt-page-enter.pt-revealing body.dossier-page .page {
+    opacity:1;
+    transform:translate3d(0,0,0);
+    transition:
+      opacity 900ms cubic-bezier(.6,0,.35,1),
+      transform 900ms cubic-bezier(.6,0,.35,1)
+  }
+
+  html.pt-page-enter.pt-revealing body.dossier-page .scroll-meter,
+  html.pt-page-enter.pt-revealing body.dossier-page .companion {
+    opacity:1;
+    transform:translate3d(0,0,0);
+    transition:
+      opacity 900ms cubic-bezier(.6,0,.35,1),
+      transform 900ms cubic-bezier(.6,0,.35,1)
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .pt-logo,
+  .pt-cover .pt-logo,
+  .pt-mask.is-complete .pt-logo,
+  :root[data-theme=light] .pt-mask.is-complete .pt-logo,
+  :root[data-theme=light] .pt-cover .pt-logo {
+    filter:none
+  }
+}

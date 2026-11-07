@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#050504">
+  <title>SHUIKE — 个人档案</title>
+  <link rel="icon" href="data:,">
+  <link rel="canonical" href="../../index.html">
+  <script>
+    // The personal dossier became the site home. Old links keep their query
+    // string (?lang=) and in-page anchor, e.g. profile/personal/index.html#contact.
+    (() => {
+      try {
+        location.replace("../../index.html" + location.search + location.hash);
+      } catch (_) {}
+    })();
+  </script>
+  <meta http-equiv="refresh" content="0; url=../../index.html">
+  <style>
+    html,body{height:100%;margin:0}
+    body{display:grid;place-items:center;background:#050504;color:#eee9de;font:14px/1.7 "Segoe UI","Microsoft YaHei",sans-serif}
+    a{color:#d8c39a}
+  </style>
+</head>
+<body>
+  <p>个人档案已移至 <a href="../../index.html">首页</a>。</p>
+</body>
+</html>
